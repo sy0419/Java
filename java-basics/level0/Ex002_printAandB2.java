@@ -2,7 +2,7 @@
    제한사항) -100,000 ≤ a, b ≤ 100,000
  */
 
-public class printAandB_002_1 {
+public class Ex002_printAandB2 {
     public static void main(String[] args) {
         String result1 = solution1("3", "4");
         String result2 = solution2("3", "4");
