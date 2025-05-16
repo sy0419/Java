@@ -4,7 +4,7 @@
 
 import java.util.Scanner;
 
-public class printString_001 {
+public class Ex001_printString {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String a = sc.next();
