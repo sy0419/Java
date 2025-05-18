@@ -12,3 +12,12 @@ public class Ex001_printString {
         }
     }
 }
+
+/* public static void main(String[] args)
+ * 자바 프로그램의 **시작점(main method)**입니다.
+ * public → 어디서든 접근 가능
+ * static → 객체 생성 없이 실행 가능
+ * void → 반환값 없음
+ * String[] args → 명령줄 인자 받을 때 사용
+ * 자바 프로그램은 항상 main()부터 실행
+ */
