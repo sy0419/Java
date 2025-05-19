@@ -3,17 +3,17 @@
 
 public class Ex012_listToString {
     public static void main(String[] args) {
-        System.out.println(solution(new String[] {"a", "b", "c"}));
+        //System.out.println(solution(new String[] {"a", "b", "c"}));
         System.out.println(solution2(new String[] {"a", "b", "c"}));
     }
 
-    public static String solution(String[] arr) {
-        String result = "";
-        for (int i = 0; i < arr.length; i++) {
-            result += arr[i];
-        }
-        return result;
-    }
+    // public static String solution(String[] arr) {
+    //     String result = "";
+    //     for (int i = 0; i < arr.length; i++) {
+    //         result += arr[i];
+    //     }
+    //     return result;
+    // }
 
     public static String solution2(String[] arr) {
         String result = "";
