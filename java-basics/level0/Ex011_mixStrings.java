@@ -22,7 +22,7 @@ public class Ex011_mixStrings {
  * Example: If str1 = "aaaaa", the first character 'a' will be added. 예: str1 = "aaaaa"일 때, 처음엔 'a'가 붙는다.
  */
 
- /* result += str2.charAt(i);
+ /* result += str2.charAt(i)j;
  * Appends the i-th character of str2 to result. str2의 i번째 문자를 result에 붙여준다.
  * Example: If str2 = "bbbbb", the first character 'a' will be added. 예: str2 = "bbbbb"일 때, 처음엔 'b'가 붙는다.
  */
