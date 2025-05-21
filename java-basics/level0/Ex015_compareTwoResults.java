@@ -7,7 +7,7 @@ import java.util.Scanner;
    단, a ⊕ b와 2 * a * b가 같으면 a ⊕ b를 return 합니다.
    제한사항) 1 ≤ a, b < 10,000 */
 
-public class Ex015_compareTwoOperations {
+public class Ex015_compareTwoResults {
     public static void main(String[] args) {
         System.out.println(solution(2, 91));
         System.out.println(solution2());
