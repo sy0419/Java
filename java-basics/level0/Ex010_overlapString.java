@@ -4,7 +4,7 @@
    1 ≤ overwrite_string의 길이 ≤ my_string의 길이 ≤ 1,000
    0 ≤ s ≤ my_string의 길이 - overwrite_string의 길이 */
 
-public class Ex010_OverlappingString {
+public class Ex010_overlappingString {
     public static void main(String[] args) {
         System.out.println(solution("He11oWor1d", "lloWorl", 2));
     }
