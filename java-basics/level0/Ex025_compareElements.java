@@ -13,6 +13,7 @@ public class Ex025_compareElements {
         solution2();
     }
 
+    @SuppressWarnings("ManualArrayToCollectionCopy")
     public static int[] solution(int[] num_list) {
         int last = num_list[num_list.length-1];
         int beforeLast = num_list[num_list.length-2];
