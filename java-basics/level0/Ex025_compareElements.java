@@ -100,14 +100,14 @@ public class Ex025_compareElements {
     }
  * Starts an infinite loop. `input = sc.nextInt()` reads integers entered by the user one by one.  
  * If the input is -1, the loop stops. Otherwise, the number is added to the list.
- * 무한 루프를 시작한한다. input = sc.nextInt()는 사용자가 입력한 정수를 하나씩 읽는다. 
- * input == -1이면 입력을 멈추고 while문을 종료한한다. 그 외 숫자는 리스트에 추가한한다.
+ * 무한 루프를 시작한다. input = sc.nextInt()는 사용자가 입력한 정수를 하나씩 읽는다. 
+ * input == -1이면 입력을 멈추고 while문을 종료한한다. 그 외 숫자는 리스트에 추가한다.
  */
 
 /* int[] arr = new int[num_list.size()];
  * Creates an integer array with the same size as the list. 
  * The `solution()` function takes an array as input, so we need to convert the List into an int[] array.
- * 리스트의 크기만큼 정수 배열을 만든든다. solution() 함수는 배열을 매개변수로 받기 때문에 List를 int[]로 변환해야 한한다.
+ * 리스트의 크기만큼 정수 배열을 만든다. solution() 함수는 배열을 매개변수로 받기 때문에 List를 int[]로 변환해야 한다.
  */
 
 /* for (int i = 0; i < num_list.size(); i++) {
