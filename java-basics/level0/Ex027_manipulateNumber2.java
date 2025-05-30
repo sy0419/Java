@@ -56,3 +56,4 @@ public class Ex027_manipulateNumber2 {
         return result;
     } 
 }
+
