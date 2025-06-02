@@ -79,7 +79,8 @@ public class Ex029_sequenceAndQuery2 {
                 System.out.print("k: ");
                 int k = sc.nextInt();
                 queriesList.add(new int[] {s, e, k});
-            }   queries = new int[queriesList.size()][];
+            }   
+            queries = new int[queriesList.size()][];
             for (int i = 0; i < queriesList.size(); i++) {
                 queries[i] = queriesList.get(i);
             }
