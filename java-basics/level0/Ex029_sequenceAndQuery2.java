@@ -51,39 +51,37 @@ public class Ex029_sequenceAndQuery2 {
     }
 
     public static int[] solution2() {
-        Scanner sc = new Scanner(System.in);
-        List<Integer> arrList = new ArrayList<>();
-        System.out.print("Array(-1 to stop): ");
-        while (true) {
-            int input = sc.nextInt();
-            if (input == -1) {
-                break;
-            } arrList.add(input);
-        }
-        int[] arr = new int[arrList.size()];
-        for (int i = 0; i < arrList.size(); i++) {
-            arr[i] = arrList.get(i);
-        }
-
-        List<int[]> queriesList = new ArrayList<>();
-        System.out.println("Queries(-1 to stop)");
-        while (true) { 
-            System.out.print("s: ");
-            int s = sc.nextInt();
-            if (s == -1) {
-                break;
+        int[] arr;
+        int[][] queries;
+        try (Scanner sc = new Scanner(System.in)) {
+            List<Integer> arrList = new ArrayList<>();
+            System.out.print("Array(-1 to stop): ");
+            while (true) {
+                int input = sc.nextInt();
+                if (input == -1) {
+                    break;
+                } arrList.add(input);
+            }   arr = new int[arrList.size()];
+            for (int i = 0; i < arrList.size(); i++) {
+                arr[i] = arrList.get(i);
+            }   List<int[]> queriesList = new ArrayList<>();
+            System.out.println("Queries(-1 to stop)");
+            while (true) {
+                System.out.print("s: ");
+                int s = sc.nextInt();
+                if (s == -1) {
+                    break;
+                }
+                System.out.print("e: ");
+                int e = sc.nextInt();
+                System.out.print("k: ");
+                int k = sc.nextInt();
+                queriesList.add(new int[] {s, e, k});
+            }   queries = new int[queriesList.size()][];
+            for (int i = 0; i < queriesList.size(); i++) {
+                queries[i] = queriesList.get(i);
             }
-            System.out.print("e: ");
-            int e = sc.nextInt();
-            System.out.print("k: ");
-            int k = sc.nextInt();
-            queriesList.add(new int[] {s, e, k});          
         }
-        int[][] queries = new int[queriesList.size()][];
-        for (int i = 0; i < queriesList.size(); i++) {
-            queries[i] = queriesList.get(i);
-        }
-        sc.close();
         
         return solution(arr, queries);
     }
