@@ -79,7 +79,10 @@ public class Ex029_sequenceAndQuery2 {
             int k = sc.nextInt();
             queriesList.add(new int[] {s, e, k});          
         }
-        int[][] queries = queriesList.toArray(new int[queriesList.size()][]);
+        int[][] queries = new int[queriesList.size()][];
+        for (int i = 0; i < queriesList.size(); i++) {
+            queries[i] = queriesList.get(i);
+        }
         sc.close();
         
         return solution(arr, queries);
