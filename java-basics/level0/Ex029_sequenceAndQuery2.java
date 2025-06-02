@@ -65,7 +65,8 @@ public class Ex029_sequenceAndQuery2 {
             arr = new int[arrList.size()];
             for (int i = 0; i < arrList.size(); i++) {
                 arr[i] = arrList.get(i);
-            }   List<int[]> queriesList = new ArrayList<>();
+            }   
+            List<int[]> queriesList = new ArrayList<>();
             System.out.println("Queries(-1 to stop)");
             while (true) {
                 System.out.print("s: ");
