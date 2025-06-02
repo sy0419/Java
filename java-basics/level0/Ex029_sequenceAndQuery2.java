@@ -61,7 +61,8 @@ public class Ex029_sequenceAndQuery2 {
                 if (input == -1) {
                     break;
                 } arrList.add(input);
-            }   arr = new int[arrList.size()];
+            }   
+            arr = new int[arrList.size()];
             for (int i = 0; i < arrList.size(); i++) {
                 arr[i] = arrList.get(i);
             }   List<int[]> queriesList = new ArrayList<>();
