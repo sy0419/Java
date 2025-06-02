@@ -85,17 +85,17 @@ public class Ex031_makeArray1 {
 
 /* boolean isValid = true;
  * A flag to check if the number is valid (contains only '0' and '5').
- * 유효한 숫자인지 판별할 플래그를 설정합니다.
+ * 유효한 숫자인지 판별할 플래그를 설정한다.
  */
 
 /* for (int j = 0; j < stringNum.length(); j++)
  * A loop to check each digit (character) in the string.
- * 문자열의 각 문자(숫자 자리수)를 확인하는 반복문입니다.
+ * 문자열의 각 문자(숫자 자리수)를 확인하는 반복문이다.
  */
 
 /* char c = stringNum.charAt(j);
  * Retrieves the character at the current position.
- * 현재 자리의 문자를 가져옵니다.
+ * 현재 자리의 문자를 가져온다.
  */
 
 /* if (c != '0' && c != '5') {
@@ -103,31 +103,31 @@ public class Ex031_makeArray1 {
        break;
     }
  * If the character is neither '0' nor '5', mark it as invalid and exit the loop.
- * 문자가 '0'도 아니고 '5'도 아니라면, 유효하지 않으므로 false로 설정하고 반복을 종료합니다.
+ * 문자가 '0'도 아니고 '5'도 아니라면, 유효하지 않으므로 false로 설정하고 반복을 종료한다.
  */
 
 /* if (isValid) {
        result.add(i);
     }
  * If all digits are valid, add the number to the result list.
- * 모든 자리수가 유효하면 결과 리스트에 추가합니다.
+ * 모든 자리수가 유효하면 결과 리스트에 추가한다.
  */
 
 /* if (result.isEmpty()) {
        return new int[]{-1};
     }
  * If no valid numbers were found, return an array containing only -1.
- * 조건에 맞는 수가 하나도 없으면 -1을 배열로 리턴합니다.
+ * 조건에 맞는 수가 하나도 없으면 -1을 배열로 리턴한다.
  */
 
 /* int[] answer = new int[result.size()];
  * Create an array to store the results from the list.
- * 결과 리스트를 정수 배열로 변환할 공간을 생성합니다.
+ * 결과 리스트를 정수 배열로 변환할 공간을 생성한다.
  */
 
 /* for (int i = 0; i < result.size(); i++) {
         answer[i] = result.get(i);
     }
  * Copy each element from the list to the array.
- * 리스트의 각 요소를 배열에 복사합니다.
+ * 리스트의 각 요소를 배열에 복사한다.
  */
