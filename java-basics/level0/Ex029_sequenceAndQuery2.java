@@ -169,6 +169,15 @@ public class Ex029_sequenceAndQuery2 {
  * 리스트를 배열로 변환한다.
  */
 
+/* try-with-resources 구문 사용 이유
+ * The try-with-resources statement automatically closes I/O resources like Scanner.
+ * When the try block ends, sc.close() is called automatically, preventing resource leaks.
+ * This is a safer and cleaner way to handle closing resources compared to manually calling sc.close(), making it a good practice.
+ * try-with-resources 구문은 Scanner 같은 I/O 자원을 자동으로 닫아준다.
+ * try 블록이 끝나면 sc.close()가 자동으로 호출되어 리소스 누수를 방지해 준다.
+ * 이전에 수동으로 sc.close() 했던 부분을 더 안전하고 깔끔하게 바꾼 것이라 좋은 습관이다.
+ */
+
 /* List<int[]> queriesList = new ArrayList<>();
     System.out.println("Queries(-1 to stop)");
  * Create a list to store the queries entered by the user.
