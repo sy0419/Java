@@ -105,7 +105,9 @@ public class Ex029_sequenceAndQuery2 {
 
 /* int minVal = Integer.MAX_VALUE;
  * Initialize with the maximum possible value to find the minimum.
+ * Initialize minVal with a very large value, and during the loop, if a number meets the condition and is smaller than minVal, update it.
  * 가장 작은 값을 찾기 위해 초기값 설정한다.
+ * minVal을 아주 큰 값으로 초기화해 놓고, 반복문에서 조건에 맞는 수가 있으면, 그보다 작으면 갱신하는 식입니다.
  */
 
 /* boolean found = false;
