@@ -41,3 +41,9 @@ public class Ex035_logicalOperation {
         return (x1 || x2) && (x3 || x4);
     }
 }
+
+/* 논리합
+ * || → logical OR, OR 연산 (하나라도 true면 true)
+ * && → logical AND, AND 연산 (둘 다 true여야 true)
+ * ! → logical NOT, NOT 연산
+ */
