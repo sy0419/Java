@@ -19,6 +19,7 @@ public class Ex043_suffixesArray {
         System.out.println(Arrays.toString(solution("programmers")));
     }
 
+    @SuppressWarnings("unchecked")
     public static String[] solution(String myString) {
         // Create a list to store all suffixes
         // 모든 접미사를 저장할 리스트 생성
