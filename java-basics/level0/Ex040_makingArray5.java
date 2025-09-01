@@ -13,15 +13,13 @@ public class Ex040_makingArray5 {
     // Takes a string array intStrs and integers k, s, l; returns an int array with values > k after substring extraction
     public static int[] solution(String[] intStrs, int k, int s, int l) {
         ArrayList<Integer> list = new ArrayList<>(); // 조건을 만족하는 정수들을 저장할 리스트
-        for(int i = 0; i < intStrs.length; i++) {
+        for (String intStr : intStrs) {
             // 각 문자열에서 s 인덱스부터 길이 l만큼 부분 문자열 추출
             // Extract substring starting at index s with length l from each string
-            String tep = intStrs[i].substring(s, s+l);
-
+            String tep = intStr.substring(s, s+l);
             // 부분 문자열을 정수로 변환
             // Convert substring to integer
             int num = Integer.parseInt(tep);
-
             // 변환한 숫자가 k보다 크면 리스트에 추가
             // Add to list if number is greater than k
             if(num > k) {
