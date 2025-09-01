@@ -16,6 +16,7 @@ public class Ex043_suffixesArray {
         // Print the sorted array of suffixes for the input string "banana"
         // "banana"에 대한 정렬된 접미사 배열 출력
         System.out.println(Arrays.toString(solution("banana")));
+        System.out.println(Arrays.toString(solution("programmers")));
     }
 
     public static String[] solution(String myString) {
