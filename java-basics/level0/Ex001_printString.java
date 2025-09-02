@@ -1,0 +1,23 @@
+/*문자열 str이 주어질 때, str을 출력하는 코드를 작성해 보세요.
+제한사항) 1 ≤ str의 길이 ≤ 1,000,000 , str에는 공백이 없으며, 첫째 줄에 한 줄로만 주어집니다.
+*/
+
+import java.util.Scanner;
+
+public class Ex001_printString {
+    public static void main(String[] args) {
+        try (Scanner sc = new Scanner(System.in)) {
+            String a = sc.next();
+            System.out.println(a);
+        }
+    }
+}
+
+/* public static void main(String[] args)
+ * This is the **entry point** of a Java program. 자바 프로그램의 **시작점(main method)**입니다.
+ * public → Accessible from anywhere 어디서든 접근 가능
+ * static → Can be executed without creating an object 객체 생성 없이 실행 가능
+ * void → Does not return any value 반환값 없음
+ * String[] args → Used to receive command-line arguments 명령줄 인자 받을 때 사용
+ * Java programs always start from the main() method 자바 프로그램은 항상 main()부터 실행
+ */
