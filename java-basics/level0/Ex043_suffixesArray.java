@@ -19,6 +19,7 @@ public class Ex043_suffixesArray {
         System.out.println(Arrays.toString(solution("programmers")));
     }
 
+    @SuppressWarnings("CollectionsToArray")
     public static String[] solution(String myString) {
         // Create a list to store all suffixes
         // 모든 접미사를 저장할 리스트 생성
@@ -36,6 +37,6 @@ public class Ex043_suffixesArray {
         
         // Convert the list back to a String array and return
         // 리스트를 다시 문자열 배열로 변환하여 반환
-        return list.toArray(new String[list.size()]);
+        return list.toArray(new String[0]);
     }
 }
