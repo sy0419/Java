@@ -9,15 +9,19 @@
 
 public class Ex046_checkPrefixes {
     public static void main(String[] args) {
-        System.out.println(solution("banana", "ban"));
-        System.out.println(solution("banana", "nan"));
-        System.out.println(solution("banana", "abcd"));
+        System.out.println(solution("banana", "ban"));  // 출력: 1 (isPrefix가 접두사임)
+        System.out.println(solution("banana", "nan"));  // 출력: 0 (isPrefix가 접두사가 아님)
+        System.out.println(solution("banana", "abcd")); // 출력: 0 (isPrefix가 접두사가 아님)
     }
 
     public static int solution(String myString, String isPrefix) {
+        // myString이 isPrefix로 시작하면 1을 반환
+        // Return 1 if myString starts with isPrefix
         if (myString.startsWith(isPrefix)) {
             return 1;
         }
+        // 그렇지 않으면 0을 반환
+        // Otherwise, return 0
         return 0;
     } 
 }
