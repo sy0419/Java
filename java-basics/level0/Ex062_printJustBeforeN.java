@@ -12,6 +12,8 @@ public class Ex062_printJustBeforeN {
     public static void main(String[] args) {
         System.out.println(Arrays.toString(solution(new int[] {2, 1, 6}, 1)));        // [2]
         System.out.println(Arrays.toString(solution(new int[] {5, 2, 1, 7, 5}, 3)));  // [5, 2, 1]
+        System.out.println(Arrays.toString(solution2(new int[] {2, 1, 6}, 1)));        // [2]
+        System.out.println(Arrays.toString(solution2(new int[] {5, 2, 1, 7, 5}, 3)));  // [5, 2, 1]
     }
 
     public static int[] solution(int[] numList, int n) {
@@ -31,5 +33,11 @@ public class Ex062_printJustBeforeN {
         }
 
         return result;
+    }
+
+    public static int[] solution2(int[] numList, int n) {
+        // numList 배열에서 0번째 인덱스부터 n-1번째 인덱스까지 복사하여 반환
+        // # Return a new array containing elements from index 0 to n-1 of numList
+        return Arrays.copyOfRange(numList, 0, n);
     }
 }
