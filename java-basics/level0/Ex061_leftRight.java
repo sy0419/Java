@@ -56,7 +56,7 @@ public class Ex061_leftRight {
             }
         }
 
-        return list.toArray(new String[0]); // ArrayList를 배열로 변환 후 반환  
+        return list.toArray(String[]::new); // ArrayList를 배열로 변환 후 반환  
         // # Convert ArrayList to array and return
     }
 }
