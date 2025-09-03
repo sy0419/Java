@@ -32,20 +32,24 @@ public class Ex055_cuttingList {
         int start;
         int end;
         int step = 1;       // 기본 간격 default step
-
-        if (n == 1) {
-            start = 0;
-            end = b;
-        } else if (n == 2) {
-            start = a;
-            end = numList.length - 1;
-        } else if (n == 3) {
-            start = a;
-            end = b;
-        } else {
-            start = a;
-            end = b;
-            step = c;
+        switch (n) {
+            case 1 -> {
+                start = 0;
+                end = b;
+            }
+            case 2 -> {
+                start = a;
+                end = numList.length - 1;
+            }
+            case 3 -> {
+                start = a;
+                end = b;
+            }
+            default -> {
+                start = a;
+                end = b;
+                step = c;
+            }
         }
         
         int size = (end - start) / step + 1;  // 결과 배열 크기 size of result array
