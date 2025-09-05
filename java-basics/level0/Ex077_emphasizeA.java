@@ -10,6 +10,7 @@ public class Ex077_emphasizeA {
         // 테스트 케이스 실행
         // # Run test cases
         System.out.println(solution("abstract algebra")); // 기대 결과: AbstrAct AlgebrA
+        System.out.println(solution("PrOgRaMmErS")); // 기대 결과: progrAmmers
     }
 
     public static String solution(String myString) {
