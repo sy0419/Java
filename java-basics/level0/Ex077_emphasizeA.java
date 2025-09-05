@@ -1,5 +1,5 @@
 // 문자열 myString이 주어집니다. myString에서 알파벳 "a"가 등장하면 전부 "A"로 변환하고,
-//  "A"가 아닌 모든 대문자 알파벳은 소문자 알파벳으로 변환하여 return 하는 solution 함수를 완성하세요.
+// "A"가 아닌 모든 대문자 알파벳은 소문자 알파벳으로 변환하여 return 하는 solution 함수를 완성하세요.
 
 // 제한사항
 // 1 ≤ myString의 길이 ≤ 20
@@ -9,11 +9,18 @@ public class Ex077_emphasizeA {
     public static void main(String[] args) {
         // 테스트 케이스 실행
         // # Run test cases
-        System.out.println(solution("abstract algebra")); // 기대 결과: AbstrAct AlgebrA
-        System.out.println(solution("PrOgRaMmErS")); // 기대 결과: progrAmmers
+        System.out.println("1.");
+        System.out.println(solution1("abstract algebra")); // 기대 결과: AbstrAct AlgebrA
+        System.out.println(solution1("PrOgRaMmErS")); // 기대 결과: progrAmmers
+        System.out.println("2.");
+        System.out.println(solution2("abstract algebra")); // 기대 결과: AbstrAct AlgebrA
+        System.out.println(solution2("PrOgRaMmErS")); // 기대 결과: progrAmmers
+        System.out.println("3.");
+        System.out.println(solution3("abstract algebra")); // 기대 결과: AbstrAct AlgebrA
+        System.out.println(solution3("PrOgRaMmErS")); // 기대 결과: progrAmmers
     }
 
-    public static String solution(String myString) {
+    public static String solution1(String myString) {
         // 결과 문자열을 만들기 위한 StringBuilder 선언
         // # Declare a StringBuilder to build the result string
         StringBuilder sb = new StringBuilder();
@@ -30,7 +37,7 @@ public class Ex077_emphasizeA {
                 sb.append('A');
             } else if (Character.isUpperCase(ch) && ch != 'A') {
                 // 'A'가 아닌 대문자는 소문자로 변환
-                // # If it's an uppercase letter and not 'A', convert to lowercase
+                // # If it's an uppercase letter and not 'A', convert it to lowercase
                 sb.append(Character.toLowerCase(ch));
             } else {
                 // 그 외의 문자는 그대로 추가
@@ -41,5 +48,24 @@ public class Ex077_emphasizeA {
 
         return sb.toString(); // 최종 문자열 반환
                               // # Return the final string
+    }
+
+    public static String solution2(String myString) {
+        // 모든 문자를 소문자로 변환
+        // # Convert the entire string to lowercase
+        myString = myString.toLowerCase();
+
+        // 'a'를 'A'로 변환
+        // # Replace all 'a' characters with 'A'
+        myString = myString.replace('a', 'A');
+
+        return myString; // 변환된 문자열 반환
+                         // # Return the modified string
+    }
+
+    public static String solution3(String myString) {
+        // 소문자로 변환 후, "a"를 "A"로 변환 (정규식 사용)
+        // # Convert to lowercase and replace all "a" with "A" using regex
+        return myString.toLowerCase().replaceAll("a", "A");
     }
 }
