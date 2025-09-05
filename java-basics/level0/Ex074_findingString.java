@@ -11,8 +11,8 @@ public class Ex074_findingString {
     public static void main(String[] args) {
         // 예시 테스트 출력
         // # Test case output
-        System.out.println(solution("AbCdEfG", "aBc")); // 기대 결과: 1
-        System.out.println(solution("aaAA", "aaaaa"));  // 기대 결과: 0
+        System.out.println(solution("AbCdEfG", "aBc"));
+        System.out.println(solution("aaAA", "aaaaa"));  
     }
 
     public static int solution(String myString, String pat) {
