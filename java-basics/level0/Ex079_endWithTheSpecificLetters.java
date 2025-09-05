@@ -8,11 +8,15 @@
 
 public class Ex079_endWithTheSpecificLetters {
     public static void main(String[] args) {
-        System.out.println(solution("AbCdEFG", "dE"));
-        System.out.println(solution("AAAAaaaa", "a"));
+        System.out.println(solution("AbCdEFG", "dE")); // 기대 결과: AbCdE
+        System.out.println(solution("AAAAaaaa", "a")); // 기대 결과: AAAAaaaa
     }
 
     public static String solution(String myString, String pat) {
-        
+        int lastIndex = myString.lastIndexOf(pat); // pat이 마지막으로 등장하는 인덱스 찾기
+        // # Find the last index where 'pat' appears in 'myString'
+
+        return myString.substring(0, lastIndex + pat.length()); // 해당 위치까지 자르기
+        // # Return the substring from index 0 to the end of 'pat' (inclusive)
     }
 }
