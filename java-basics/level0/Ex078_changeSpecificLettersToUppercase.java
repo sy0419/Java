@@ -6,10 +6,13 @@
 
 public class Ex078_changeSpecificLettersToUppercase {
     public static void main(String[] args) {
-        System.out.println(solution());
+        System.out.println(solution("programmers", "p")); // 기대 결과: Programmers
+        System.out.println(solution("lowercase", "x"));   // 기대 결과: lowercase
     }
 
-    public static String solution(String myString, Strign alp) {
-        
+    public static String solution(String myString, String alp) {
+        // alp 문자를 대문자로 변환하여 대체
+        // # Replace all occurrences of 'alp' in 'myString' with its uppercase version
+        return myString.replaceAll(alp, alp.toUpperCase());
     }
 }
