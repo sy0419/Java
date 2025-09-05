@@ -5,5 +5,16 @@
 // myString은 알파벳으로 이루어진 문자열입니다.
 
 public class Ex075_changeToLowerCase {
+    public static void main(String[] args) {
+        // 테스트 케이스 출력
+        // # Print test case results
+        System.out.println(solution("aBcDeFg")); // 기대 결과: abcdefg
+        System.out.println(solution("AAA"));     // 기대 결과: aaa
+    }
 
+    public static String solution(String myString) {
+        // 문자열을 소문자로 변환하여 반환
+        // # Convert the input string to lowercase and return it
+        return myString.toLowerCase();
+    }
 }
