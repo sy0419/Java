@@ -16,6 +16,7 @@ public class Ex089_threeSeparators {
         System.out.println(Arrays.toString(solution("cabab")));             // → ["EMPTY"]
     }
 
+    @SuppressWarnings("CollectionsToArray")
     public static String[] solution(String myString) {
         ArrayList<String> strList = new ArrayList<>();
 
