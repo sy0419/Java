@@ -16,6 +16,7 @@ public class Ex085_splitStringThenSort {
         System.out.println(Arrays.toString(solution("dxccxbbbxaaaa")));
     }
 
+    @SuppressWarnings("CollectionsToArray")
     public static String[] solution(String myString) {
         String[] splitParts = myString.split("x"); // "x"를 기준으로 분리  # Split by "x"
 
