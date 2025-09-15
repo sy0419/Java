@@ -3,6 +3,7 @@
 // 제한사항
 // 6 ≤ num_list의 길이 ≤ 30
 // 1 ≤ num_list의 원소 ≤ 100
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
