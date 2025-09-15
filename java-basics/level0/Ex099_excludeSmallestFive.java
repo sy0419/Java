@@ -4,34 +4,32 @@
 // 6 ≤ num_list의 길이 ≤ 30
 // 1 ≤ num_list의 원소 ≤ 100
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Ex099_excludeSmallestFive {
     public static void main(String[] args) {
+        // 테스트용 예시 배열을 출력합니다.
+        // # Print the example array for testing.
         System.out.println(Arrays.toString(solution(new int[] {12, 4, 15, 46, 38, 1, 14, 56, 32, 10})));
     }
 
     public static int[] solution(int[] numList) {
-        ArrayList<Integer> arrList = new ArrayList<>();
+        // 입력 배열 길이에서 가장 작은 5개를 제외한 만큼의 크기로 결과 배열을 만듭니다.
+        // # Create an answer array sized to exclude the smallest five elements.
+        int[] answer = new int[numList.length - 5];
+
         // 배열을 오름차순으로 정렬합니다.
         // # Sort the array in ascending order.
         Arrays.sort(numList);
 
-        // 정렬된 배열에서 가장 작은 5개는 제외하고, 6번째 요소부터 끝까지 리스트에 추가합니다.
-        // # Exclude the smallest 5 elements and add elements from index 5 to the end into arrList.
-        for (int i = 5; i < numList.length; i++) {
-            arrList.add(numList[i]);
+        // 정렬된 배열에서 가장 작은 5개를 제외한 나머지 수들을 결과 배열에 복사합니다.
+        // # Copy elements from index 5 to the end into the answer array.
+        for(int i = 5 ; i < numList.length ; i++) {
+            answer[i - 5] = numList[i];
         }
 
-        // ArrayList를 다시 int 배열로 변환합니다.
-        // # Convert the ArrayList back to an int array.
-        int[] result = new int[arrList.size()];
-        for (int i = 0; i < arrList.size(); i++) {
-            result[i] = arrList.get(i);
-        }
-
-        return result; // 결과 배열을 반환합니다.
+        // 결과 배열을 반환합니다.
         // # Return the resulting array.
+        return answer;
     }
 }
