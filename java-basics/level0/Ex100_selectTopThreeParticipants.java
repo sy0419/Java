@@ -1,7 +1,3 @@
-
-import java.util.ArrayList;
-import java.util.TreeMap;
-
 // 0번부터 n - 1번까지 n명의 학생 중 3명을 선발하는 전국 대회 선발 고사를 보았습니다. 
 // 등수가 높은 3명을 선발해야 하지만, 개인 사정으로 전국 대회에 참여하지 못하는 학생들이 있어 참여가 가능한 학생 중 
 // 등수가 높은 3명을 선발하기로 했습니다.
@@ -16,6 +12,8 @@ import java.util.TreeMap;
 // attendance[i]는 i번 학생의 전국 대회 참석 가능 여부를 나타냅니다.
 // attendance[i]가 true라면 참석 가능, false면 참석 불가능을 의미합니다.
 // attendance의 원소 중 적어도 3개는 true입니다.
+import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class Ex100_selectTopThreeParticipants {
     public static void main(String[] args) {
