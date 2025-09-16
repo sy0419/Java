@@ -41,6 +41,6 @@ public class Ex114_pictureZoom {
         }
         // 리스트를 배열로 변환하여 반환
         // # Convert the list to an array before returning
-        return result.toArray(new String[0]);
+        return result.toArray(String[]::new);
     }
 }
