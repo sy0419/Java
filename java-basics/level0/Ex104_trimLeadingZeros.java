@@ -13,10 +13,12 @@ public class Ex104_trimLeadingZeros {
     }
 
     public static String solution1(String nStr) {
-        return nStr.replaceFirst("^0+", "");  // 문자열 앞의 연속된 0 제거 # Remove leading zeros from the string using regex
+        // 정규식으로 문자열 앞에 연속된 0 제거 # Remove leading zeros from the string using regex
+        return nStr.replaceFirst("^0+", "");  
     }
 
     public static String solution2(String nStr) {
-        return ""+Integer.valueOf(nStr);
+        // 문자열을 정수형으로 변환 후 다시 문자열로 변환하여 선행 0 제거 # Convert to integer and back to string to remove leading zeros
+        return "" + Integer.valueOf(nStr);  
     }
 }
