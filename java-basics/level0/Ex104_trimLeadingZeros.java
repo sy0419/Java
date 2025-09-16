@@ -6,11 +6,17 @@
 
 public class Ex104_trimLeadingZeros {
     public static void main(String[] args) {
-        System.out.println(solution("0010"));    // 출력: 10 # Output: 10
-        System.out.println(solution("854020"));  // 출력: 854020 # Output: 854020
+        System.out.println(solution1("0010"));    // 출력: 10 # Output: 10
+        System.out.println(solution1("854020"));  // 출력: 854020 # Output: 854020
+        System.out.println(solution2("0010"));    // 출력: 10 # Output: 10
+        System.out.println(solution2("854020"));  // 출력: 854020 # Output: 854020
     }
 
-    public static String solution(String nStr) {
+    public static String solution1(String nStr) {
         return nStr.replaceFirst("^0+", "");  // 문자열 앞의 연속된 0 제거 # Remove leading zeros from the string using regex
+    }
+
+    public static String solution2(String nStr) {
+        return ""+Integer.valueOf(nStr);
     }
 }
