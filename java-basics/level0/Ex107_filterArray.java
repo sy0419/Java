@@ -42,7 +42,7 @@ public class Ex107_filterArray {
         return result;                                         // 결과 반환 # Return result
     }
 
-    public int[] solution2(int[] arr, int[] delete_list) {
+    public static int[] solution2(int[] arr, int[] delete_list) {
         List<Integer> list = new ArrayList<>();                // arr를 복사할 리스트 # List to copy values from arr
 
         for(int n : arr) {
