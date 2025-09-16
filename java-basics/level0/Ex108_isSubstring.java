@@ -12,14 +12,14 @@
 
 public class Ex108_isSubstring {
     public static void main(String[] args) {
-        System.out.println(solution("banana", "ana"));
-        System.out.println(solution("banana", "wxyz"));
+        System.out.println(solution("banana", "ana")); // 출력: 1 # Output: 1
+        System.out.println(solution("banana", "wxyz")); // 출력: 0 # Output: 0
     }
 
     public static int solution(String myString, String target) {
-        if (myString.contains(target)) {
-            return 1;
+        if (myString.contains(target)) { // myString이 target을 포함하면 # Check if myString contains target
+            return 1; // 포함되면 1 반환 # Return 1 if true
         }
-        return 0;
+        return 0; // 포함되지 않으면 0 반환 # Return 0 if false
     }
 }
