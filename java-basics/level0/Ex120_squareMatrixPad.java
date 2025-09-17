@@ -15,6 +15,7 @@ public class Ex120_squareMatrixPad {
         System.out.println(Arrays.deepToString(solution(new int[][]{{1, 2}, {3, 4}})));
     }
 
+    @SuppressWarnings("ManualArrayToCollectionCopy")
     public static int[][] solution(int[][] arr) {
         int row = arr.length;  // 행 개수, # Number of rows in the original array
         int col = arr[0].length;  // 열 개수, # Number of columns in the original array
