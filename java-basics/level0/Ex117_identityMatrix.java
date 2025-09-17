@@ -1,9 +1,9 @@
-import java.util.Arrays;
-
 // 정수 n이 매개변수로 주어질 때, 다음과 같은 n × n 크기의 이차원 배열 arr를 return 하는 solution 함수를 작성해 주세요.
 // arr[i][j] (0 ≤ i, j < n)의 값은 i = j라면 1, 아니라면 0입니다.
 // 제한사항
 // 1 ≤ n ≤ 100
+
+import java.util.Arrays;
 
 public class Ex117_identityMatrix {
     public static void main(String[] args) {
@@ -16,7 +16,7 @@ public class Ex117_identityMatrix {
         System.out.println(Arrays.deepToString(solution2(1))); // 예상 출력: [[1]]
     }
 
-    // n × n 단위 행렬 생성 # Generate n x n identity matrix
+    // 방법 1: 이중 for문으로 모든 원소 확인 # Method 1: Double for-loop to check all elements
     public static int[][] solution1(int n) {
         int[][] arr = new int[n][n]; // 2차원 배열 선언 # Declare 2D array
 
@@ -30,11 +30,14 @@ public class Ex117_identityMatrix {
         return arr; // 결과 배열 반환 # Return result array
     }
 
+    // 방법 2: 한 for문으로 대각선 원소만 1로 설정 # Method 2: Single for-loop to set diagonal elements only
     public static int[][] solution2(int n) {
-        int[][] answer = new int[n][n];
-        for(int i = 0 ; i < n ; i++) {
-            answer[i][i] = 1;
+        int[][] answer = new int[n][n]; // 2차원 배열 선언 # Declare 2D array
+
+        for (int i = 0; i < n; i++) {
+            answer[i][i] = 1; // 대각선 위치에 1 저장 # Set 1 on diagonal positions only
         }
-        return answer;
+
+        return answer; // 결과 배열 반환 # Return result array
     }
 }
