@@ -8,12 +8,13 @@
 
 public class Ex010_sumBetweenTwoNumbers {
     public static void main(String[] args) {
-        System.out.println(solution(3, 5));
-        System.out.println(solution(3, 3));
-        System.out.println(solution(5, 3));
+        System.out.println(solution(3, 5));  
+        System.out.println(solution(3, 3));  
+        System.out.println(solution(5, 3));  
     }
 
     public static long solution(int a, int b) {
+        // a와 b의 대소 관계에 따라 작은 값(min)과 큰 값(max) 결정 # Determine min and max from a and b
         int min;
         int max;
         if (a > b) {
@@ -23,10 +24,14 @@ public class Ex010_sumBetweenTwoNumbers {
             min = a;
             max = b;
         }
+
+        // 작은 값(min)부터 큰 값(max)까지 합산 # Add numbers from min to max, inclusive
         long result = 0;
         for (int i = min; i <= max; i++) {
-            result += i;
+            result += i;  // result는 long 타입, i는 int 타입이므로 자동으로 i가 long으로 형변환됨 # Automatic type conversion: i (int) is implicitly converted to long
         }
+
+        // 계산된 합을 리턴 # Return the calculated sum
         return result;
     }
 }
