@@ -5,16 +5,16 @@
 
 public class Ex020_MiddleChar {
     public static void main(String[] args) {
-        System.out.println(solution("abcde"));
-        System.out.println(solution("qwer"));
+        System.out.println(solution("abcde"));  // "c" 출력 # prints "c"
+        System.out.println(solution("qwer"));   // "we" 출력 # prints "we"
     }
 
     public static String solution(String s) {
-        int length = s.length();
-        if (length % 2 == 1) {
-            return s.substring(length/2, length/2 +1);
-        } else {
-            return s.substring(length/2 -1, length/2 +1);
+        int length = s.length();                           // 문자열 길이 계산 # Get string length
+        if (length % 2 == 1) {                              // 홀수 길이인 경우 # If length is odd
+            return s.substring(length / 2, length / 2 + 1); // 가운데 글자 한 개 반환 # Return one middle character
+        } else {                                            // 짝수 길이인 경우 # If length is even
+            return s.substring(length / 2 - 1, length / 2 + 1); // 가운데 글자 두 개 반환 # Return two middle characters
         }
     }
 }
