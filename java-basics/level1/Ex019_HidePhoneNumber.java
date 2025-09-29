@@ -6,21 +6,31 @@
 
 public class Ex019_HidePhoneNumber {
     public static void main(String[] args) {
-        System.out.println(solution("01033334444"));  // *******4444 출력 # prints *******4444
-        System.out.println(solution("027778888"));    // *****8888 출력 # prints *****8888
+        System.out.println(solution1("01033334444"));  // *******4444 출력 # prints *******4444
+        System.out.println(solution1("027778888"));    // *****8888 출력 # prints *****8888
+        System.out.println(solution2("01033334444"));  // *******4444 출력 # prints *******4444
+        System.out.println(solution2("027778888"));    // *****8888 출력 # prints *****8888
     }
 
-    public static String solution(String phoneNumber) {
-        StringBuilder sb = new StringBuilder();  // 결과를 조합할 StringBuilder 생성 # Create StringBuilder to build the result
-        int n = phoneNumber.length();             // 전화번호 길이 구하기 # Get length of the phone number
-        String last4 = phoneNumber.substring(n-4, n); // 뒤 4자리 추출 # Extract last 4 characters
-        int hidingN = n - 4;                       // 가려야 할 자리 수 계산 # Calculate how many characters to hide
+    public static String solution1(String phoneNumber) {
+        StringBuilder sb = new StringBuilder();                  // 결과를 조합할 StringBuilder 생성 # Create StringBuilder to build the result
+        int n = phoneNumber.length();                             // 전화번호 길이 구하기 # Get length of the phone number
+        String last4 = phoneNumber.substring(n - 4, n);           // 뒤 4자리 추출 # Extract last 4 characters
+        int hidingN = n - 4;                                      // 가려야 할 자리 수 계산 # Calculate how many characters to hide
         
         for (int i = 0; i < hidingN; i++) {
-            sb.append("*");                        // 앞 부분을 '*'로 대체 # Replace the front part with '*'
+            sb.append("*");                                       // 앞 부분을 '*'로 대체 # Replace the front part with '*'
         }
-        sb.append(last4);                         // 마지막 4자리 원본 번호 붙이기 # Append the last 4 digits
+        sb.append(last4);                                         // 마지막 4자리 원본 번호 붙이기 # Append the last 4 digits
 
-        return sb.toString();                     // 최종 문자열 반환 # Return the final string
+        return sb.toString();                                     // 최종 문자열 반환 # Return the final string
+    }
+
+    public static String solution2(String phoneNumber) {
+        char[] ch = phoneNumber.toCharArray();                    // 문자열을 문자 배열로 변환 # Convert string to char array
+        for (int i = 0; i < ch.length - 4; i++) {
+            ch[i] = '*';                                          // 앞부분을 '*'로 교체 # Replace front part with '*'
+        }
+        return String.valueOf(ch);                                // 문자 배열을 문자열로 변환해 반환 # Convert char array back to string and return
     }
 }
