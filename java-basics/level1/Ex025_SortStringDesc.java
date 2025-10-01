@@ -8,17 +8,19 @@ import java.util.Arrays;
 
 public class Ex025_SortStringDesc {
     public static void main(String[] args) {
-        System.out.println(solution("Zbcdefg"));
+        System.out.println(solution("Zbcdefg")); // gfedcbZ
     }
 
     public static String solution(String s) {
-        char[] arrStr = s.toCharArray();
-        Arrays.sort(arrStr);
-        StringBuilder sb = new StringBuilder();
-        for (int i = arrStr.length - 1; i >= 0; i--) {
-            sb.append(arrStr[i]);
+        char[] arrStr = s.toCharArray(); // 문자열을 문자 배열로 변환 # Convert string to char array
+        Arrays.sort(arrStr); // 문자 배열 오름차순 정렬 # Sort char array in ascending order
+
+        StringBuilder sb = new StringBuilder(); // 문자열을 효율적으로 조합할 도구 # StringBuilder to build result
+
+        for (int i = arrStr.length - 1; i >= 0; i--) { // 배열을 역순으로 순회 # Traverse the array in reverse
+            sb.append(arrStr[i]); // 큰 문자부터 추가 # Append characters from largest to smallest
         }
 
-        return sb.toString();
+        return sb.toString(); // 최종 문자열 반환 # Return the final sorted string
     }
 }
