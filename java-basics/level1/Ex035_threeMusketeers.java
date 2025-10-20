@@ -14,22 +14,24 @@
 
 public class Ex035_threeMusketeers {
     public static void main(String[] args) {
-        System.out.println(solution(new int[] {-2, 3, 0, 2, -5}));
-        System.out.println(solution(new int[] {-3, -2, -1, 0, 1, 2, 3}));
-        System.out.println(solution(new int[] {-1, 1, -1, 1}));
+        System.out.println(solution(new int[] {-2, 3, 0, 2, -5}));     // 결과: 2 # Expected output: 2
+        System.out.println(solution(new int[] {-3, -2, -1, 0, 1, 2, 3})); // 결과: 5 # Expected output: 5
+        System.out.println(solution(new int[] {-1, 1, -1, 1}));         // 결과: 0 # Expected output: 0
     }
 
     public static int solution(int[] number) {
-        int count = 0;
-        for (int i = 0; i < number.length - 2; i++) {
-            for (int j = i + 1; j < number.length - 1; j++) {
-                for (int k = j + 1; k < number.length; k++) {
-                    if (number[i] + number[j] + number[k] == 0) {
-                        count++;
+        int count = 0; // 삼총사 조합 개수 저장 변수 # Variable to store the count of valid combinations
+
+        for (int i = 0; i < number.length - 2; i++) {       // 첫 번째 학생 선택 # Select first student
+            for (int j = i + 1; j < number.length - 1; j++) { // 두 번째 학생 선택 # Select second student
+                for (int k = j + 1; k < number.length; k++) { // 세 번째 학생 선택 # Select third student
+                    if (number[i] + number[j] + number[k] == 0) { // 세 학생의 번호 합이 0인지 확인 # Check if the sum is zero
+                        count++; // 조건 만족 시 count 증가 # Increment count if valid
                     }
                 }
             }
         }
-        return count;
+
+        return count; // 삼총사 조합 수 반환 # Return the total number of combinations
     }
 }
