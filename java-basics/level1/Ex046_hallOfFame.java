@@ -26,17 +26,19 @@ public class Ex046_hallOfFame {
     }
 
     public static int[] solution(int k, int[] score) {
-        ArrayList<Integer> arrlist = new ArrayList<>();
-        int[] result = new int[score.length];
+        ArrayList<Integer> arrlist = new ArrayList<>();  // 명예의 전당 점수 리스트 # Hall of Fame score list
+        int[] result = new int[score.length];            // 매일 최하위 점수를 저장할 배열 # Array to store daily lowest scores in Hall of Fame
 
         for (int i = 0; i < score.length; i++) {
-            arrlist.add(score[i]);
-            Collections.sort(arrlist);
-            if (arrlist.size() > k) {
-                arrlist.remove(0);
+            arrlist.add(score[i]);                      // 오늘 점수를 명예의 전당 후보에 추가 # Add today's score to candidate list
+            Collections.sort(arrlist);                   // 명예의 전당 점수 오름차순 정렬 # Sort scores in ascending order
+            
+            if (arrlist.size() > k) {                    // 명예의 전당 점수가 k개 초과하면 # If more than k scores, remove lowest
+                arrlist.remove(0);                       // 최하위 점수 제거 # Remove the lowest score
             }
-            result[i] = arrlist.get(0);
+            
+            result[i] = arrlist.get(0);                  // 현재 명예의 전당 최하위 점수 기록 # Record current lowest score in Hall of Fame
         }
-        return result;
+        return result;                                   // 결과 배열 반환 # Return result array
     }
 }
