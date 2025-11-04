@@ -10,11 +10,13 @@
 
 public class Ex058_babblingCount {
     public static void main(String[] args) {
-        System.out.println(solution(new String[] {"aya", "yee", "u", "maa"})); // 1
-        System.out.println(solution(new String[] {"ayaye", "uuu", "yeye", "yemawoo", "ayaayaa"})); // 2
+        System.out.println(solution1(new String[] {"aya", "yee", "u", "maa"})); // 1
+        System.out.println(solution1(new String[] {"ayaye", "uuu", "yeye", "yemawoo", "ayaayaa"})); // 2
+        System.out.println(solution2(new String[] {"aya", "yee", "u", "maa"})); // 1
+        System.out.println(solution2(new String[] {"ayaye", "uuu", "yeye", "yemawoo", "ayaayaa"})); // 2
     }
 
-    public static int solution(String[] babbling) {
+    public static int solution1(String[] babbling) {
         int result = 0; // 결과 개수 # Count of pronounceable words
         String[] sounds = {"aya", "ye", "woo", "ma"}; // 가능한 발음 # Allowed sounds
 
@@ -52,5 +54,27 @@ public class Ex058_babblingCount {
         }
 
         return result; // 결과 반환 # Return count
+    }
+
+    public static int solution2(String[] babbling) {
+        int answer = 0; // 결과 변수 # Count of pronounceable words
+
+        for(int i = 0; i < babbling.length; i++) {
+            // 연속 발음 있는지 확인 # Skip if same sound repeats consecutively
+            if(babbling[i].contains("ayaaya") || babbling[i].contains("yeye") || babbling[i].contains("woowoo") || babbling[i].contains("mama")) {
+                continue; // 반복 있으면 다음 단어로 # Skip word if invalid
+            }
+
+            // 발음을 공백으로 치환 # Replace known sounds with spaces
+            babbling[i] = babbling[i].replace("aya", " ");
+            babbling[i] = babbling[i].replace("ye", " ");
+            babbling[i] = babbling[i].replace("woo", " ");
+            babbling[i] = babbling[i].replace("ma", " ");
+            babbling[i] = babbling[i].replace(" ", ""); // 공백 제거 # Remove spaces
+
+            if(babbling[i].length()  == 0) answer++; // 빈 문자열이면 유효 # If empty, increase count
+        }
+
+        return answer; // 결과 반환 # Return count
     }
 }
