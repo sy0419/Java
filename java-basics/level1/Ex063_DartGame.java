@@ -117,7 +117,7 @@ public class Ex063_DartGame {
 
             // 보너스 계산 # Calculating bonus
             switch (bonus) {
-                case "S" -> score = score; // 싱글 # Single
+                case "S" -> score = score * 1; // 싱글 # Single
                 case "D" -> score = score * score; // 더블 # Double
                 case "T" -> score = score * score * score; // 트리플 # Triple
             }
