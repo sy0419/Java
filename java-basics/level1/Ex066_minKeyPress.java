@@ -1,0 +1,86 @@
+// 휴대폰의 자판은 컴퓨터 키보드 자판과는 다르게 하나의 키에 여러 개의 문자가 할당될 수 있습니다. 
+// 키 하나에 여러 문자가 할당된 경우, 동일한 키를 연속해서 빠르게 누르면 할당된 순서대로 문자가 바뀝니다.
+// 예를 들어, 1번 키에 "A", "B", "C" 순서대로 문자가 할당되어 있다면 1번 키를 한 번 누르면 "A", 두 번 누르면 "B", 
+// 세 번 누르면 "C"가 되는 식입니다.
+
+// 같은 규칙을 적용해 아무렇게나 만든 휴대폰 자판이 있습니다. 
+// 이 휴대폰 자판은 키의 개수가 1개부터 최대 100개까지 있을 수 있으며, 특정 키를 눌렀을 때 입력되는 문자들도 
+// 무작위로 배열되어 있습니다. 또, 같은 문자가 자판 전체에 여러 번 할당된 경우도 있고, 키 하나에 같은 문자가 
+// 여러 번 할당된 경우도 있습니다. 심지어 아예 할당되지 않은 경우도 있습니다. 
+// 따라서 몇몇 문자열은 작성할 수 없을 수도 있습니다.
+// 이 휴대폰 자판을 이용해 특정 문자열을 작성할 때, 키를 최소 몇 번 눌러야 그 문자열을 작성할 수 있는지 알아보고자 합니다.
+
+// 1번 키부터 차례대로 할당된 문자들이 순서대로 담긴 문자열배열 keymap과 입력하려는 문자열들이 담긴 
+// 문자열 배열 targets가 주어질 때, 각 문자열을 작성하기 위해 키를 최소 몇 번씩 눌러야 하는지 순서대로 배열에 담아 return 하는 solution 함수를 완성해 주세요.
+// 단, 목표 문자열을 작성할 수 없을 때는 -1을 저장합니다.
+
+// 제한사항
+// 1 ≤ keymap의 길이 ≤ 100
+// 1 ≤ keymap의 원소의 길이 ≤ 100
+// keymap[i]는 i + 1번 키를 눌렀을 때 순서대로 바뀌는 문자를 의미합니다.
+// 예를 들어 keymap[0] = "ABACD" 인 경우 1번 키를 한 번 누르면 A, 두 번 누르면 B, 세 번 누르면 A 가 됩니다.
+// keymap의 원소의 길이는 서로 다를 수 있습니다.
+// keymap의 원소는 알파벳 대문자로만 이루어져 있습니다.
+// 1 ≤ targets의 길이 ≤ 100
+// 1 ≤ targets의 원소의 길이 ≤ 100
+// targets의 원소는 알파벳 대문자로만 이루어져 있습니다.
+
+import java.util.Arrays; // 배열 관련 기능 사용 # Using Arrays utilities
+import java.util.HashMap; // 해시맵 사용 # Using HashMap
+import java.util.Map;     // Map 인터페이스 사용 # Using Map interface
+
+public class Ex066_minKeyPress {
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(solution(new String[] {"ABACD", "BCEFD"}, new String[] {"ABCD", "AABB"}))); 
+        // 테스트 케이스 출력 # Print test case results
+        System.out.println(Arrays.toString(solution(new String[] {"AA"}, new String[] {"BB"})));
+        System.out.println(Arrays.toString(solution(new String[] {"AGZ", "BSSS"}, new String[] {"ASA","BGZ"})));
+    }
+
+    public static int[] solution(String[] keymap, String[] targets) {
+        Map<Character, Integer> map = new HashMap<>(); 
+        // 각 문자별 최소 키 입력 횟수를 저장할 맵 # Map to store minimum key presses per character
+
+        for (String key: keymap) { 
+            // 각 키의 문자열 순회 # Iterate over each key string
+            for (int i = 0; i < key.length(); i++) {
+                char c = key.charAt(i); 
+                // 현재 키에서 i번째 문자 # Current character at position i
+                int pressCount = i + 1; 
+                // 최소 입력 횟수는 위치+1 # Minimum presses = index + 1
+                if (!map.containsKey(c) || map.get(c) > pressCount) {
+                    map.put(c, pressCount); 
+                    // 이전 값이 없거나 현재 입력 횟수가 더 적으면 갱신 # Update if smaller
+                }
+            }
+        }
+
+        int[] result = new int[targets.length]; 
+        // 결과 배열 초기화 # Initialize result array
+        for (int i = 0; i < targets.length; i++) {
+            String target = targets[i]; 
+            int count = 0;              
+            boolean impossible = false; 
+            // 문자열 입력 불가 여부 체크 # Flag if string is impossible
+            for (int j = 0; j < target.length(); j++) {
+                char c = target.charAt(j); 
+                if (!map.containsKey(c)) {
+                    impossible = true; 
+                    // 해당 문자를 입력할 수 없는 경우 # Character cannot be typed
+                    break; 
+                }
+                count += map.get(c); 
+                // 최소 입력 횟수 누적 # Accumulate minimum presses
+            }
+            if (impossible) {
+                result[i] = -1; 
+                // 불가능하면 -1 저장 # Store -1 if impossible
+            } else {
+                result[i] = count; 
+                // 가능하면 누적 횟수 저장 # Store accumulated count if possible
+            }
+        }
+        return result; 
+        // 최종 결과 반환 # Return final results
+    }
+}
