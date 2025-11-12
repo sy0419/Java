@@ -37,7 +37,7 @@
 
 import java.util.Arrays; // 배열 관련 유틸리티 import # Import array utilities
 
-public class Ex063_lotto {
+public class Ex064_lotto {
 
     public static void main(String[] args) {
         // 테스트 케이스 출력 # Print test cases
