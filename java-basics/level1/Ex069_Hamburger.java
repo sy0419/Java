@@ -20,11 +20,14 @@ import java.util.Stack;
 
 public class Ex069_Hamburger { 
     public static void main(String[] args) {
-        System.out.println(solution(new int[] {2, 1, 1, 2, 3, 1, 2, 3, 1})); // 테스트 케이스 1 # Test case 1
-        System.out.println(solution(new int[] {1, 3, 2, 1, 2, 1, 3, 1, 2})); // 테스트 케이스 2 # Test case 2
+        System.out.println(solution1(new int[] {2, 1, 1, 2, 3, 1, 2, 3, 1})); // 테스트 케이스 1 # Test case 1
+        System.out.println(solution1(new int[] {1, 3, 2, 1, 2, 1, 3, 1, 2})); // 테스트 케이스 2 # Test case 2
+        System.out.println("---");
+        System.out.println(solution2(new int[] {2, 1, 1, 2, 3, 1, 2, 3, 1})); // 테스트 케이스 1 # Test case 1
+        System.out.println(solution2(new int[] {1, 3, 2, 1, 2, 1, 3, 1, 2})); // 테스트 케이스 2 # Test case 2
     }
 
-    public static int solution(int[] ingredient) {
+    public static int solution1(int[] ingredient) {
         int result = 0; // 햄버거 개수 저장 # Store the count of hamburgers
         Stack<Integer> stack = new Stack<>(); // 재료를 쌓을 스택 # Stack to hold ingredients
 
@@ -44,5 +47,26 @@ public class Ex069_Hamburger {
             }
         }
         return result; // 최종 햄버거 개수 반환 # Return total hamburger count
+    }
+
+    public static int solution2(int[] ingredient) {
+        int[] stack = new int[ingredient.length]; // 재료를 저장할 배열 스택 # Stack array to hold ingredients
+        int sp = 0; // 스택 포인터, 현재 스택의 높이 # Stack pointer, current stack height
+        int answer = 0; // 포장한 햄버거 개수 # Count of hamburgers packed
+
+        for (int i : ingredient) { 
+            stack[sp++] = i; // 재료를 스택에 추가하고 포인터 증가 # Push ingredient onto stack and increment pointer
+
+            // 마지막 4개의 재료가 햄버거 순서(빵-야채-고기-빵)인지 확인 # Check if last 4 ingredients match hamburger pattern
+            if (sp >= 4 && stack[sp - 4] == 1 
+                        && stack[sp - 3] == 2 
+                        && stack[sp - 2] == 3 
+                        && stack[sp - 1] == 1) {
+                sp -= 4; // 완성된 햄버거 제거, 스택 포인터 감소 # Remove the hamburger from stack by moving pointer down
+                answer++; // 햄버거 개수 증가 # Increment hamburger count
+            }
+        }
+
+        return answer; // 최종 햄버거 개수 반환 # Return total hamburger count
     }
 }
