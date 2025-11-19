@@ -42,12 +42,11 @@ public class Ex072_CraneDollGame {
 
         for (int move : moves) { 
             int column = move - 1; // 배열 인덱스로 변환 # Convert to 0-index
-
-            for (int row = 0; row < board.length; row++) {
-                if (board[row][column] != 0) { 
-                    int doll = board[row][column]; // 뽑은 인형 # Picked doll
-                    board[row][column] = 0; // board에서 제거 # Remove from board
-
+            
+            for (int[] board1 : board) {
+                if (board1[column] != 0) {
+                    int doll = board1[column]; // 뽑은 인형 # Picked doll
+                    board1[column] = 0; // board에서 제거 # Remove from board
                     if (!basket.isEmpty() && basket.peek() == doll) {
                         basket.pop(); 
                         result += 2; // 연속 인형 터짐 # Pop two identical dolls
