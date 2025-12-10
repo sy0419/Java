@@ -65,6 +65,7 @@ public class Ex078_FlexibleAttendanceReward {
                     // 주말은 이벤트 영향 없음 # skip weekends
                 } else {
                     if (timelogs[i][j] > maxTime) { 
+                        
                         // 하루라도 늦으면 탈락 # if late even once
                         isEligible = false;
                         break; // 더 이상 검사 필요 없음 # stop checking this employee
