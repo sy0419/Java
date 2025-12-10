@@ -26,7 +26,7 @@
 
 public class Ex078_FlexibleAttendanceReward {
     public static void main(String[] args) {
-        // 첫 번째 테스트 케이스 # Test case 1
+        // 첫 번째 테스트 케이스 # Test case1
         System.out.println(solution(new int[] {700, 800, 1100},
                                     new int[][] {{710, 2359, 1050, 700, 650, 631, 659}, 
                                                  {800, 801, 805, 800, 759, 810, 809}, 
@@ -63,7 +63,6 @@ public class Ex078_FlexibleAttendanceReward {
 
                 if (realDay == 5 || realDay == 6) { 
                     // 주말은 이벤트 영향 없음 # skip weekends
-                    continue;
                 } else {
                     if (timelogs[i][j] > maxTime) { 
                         // 하루라도 늦으면 탈락 # if late even once
