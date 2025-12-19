@@ -40,7 +40,7 @@ public class Ex083_GetReportResults {
             String reporter = parts[0];       // 신고한 사람 # Reporter
             String reportedUser = parts[1];   // 신고당한 사람 # Reported user
             if (!reportMap.containsKey(reporter)) {
-                reportMap.put(reporter, new HashSet<String>()); 
+                reportMap.put(reporter, new HashSet<>()); 
             }
             reportMap.get(reporter).add(reportedUser);
         }
