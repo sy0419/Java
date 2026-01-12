@@ -25,7 +25,7 @@ public class Ex084_VideoPlayerCommands {
         System.out.println(solution("07:22", "04:05", "00:15", "04:07", new String[] {"next"}));
     }
 
-    public static String solution(String videoLen, String pos, String opStart, String opEnd, String[] command) {
+    public static String solution(String videoLen, String pos, String opStart, String opEnd, String[] commands) {
         String[] videoLenParts = videoLen.split(":");
         int videoLenMin = Integer.parseInt(videoLenParts[0]) * 60;
         int videoLenSec = Integer.parseInt(videoLenParts[1]);
@@ -51,25 +51,29 @@ public class Ex084_VideoPlayerCommands {
         // int opStartTotal = toSeconds(opStart);
         // int opEndTotal = toSeconds(opEnd);
 
-        for (String command1: command) {
+        for (String command1: commands) {
+            boolean isInInterval = false;
+            if (opStartTotal <= posTotal && posTotal <= opEndTotal) {
+                    isInInterval = true;
+            }
             if (command1.equals("prev")) {
-                if (posTotal >= opStartTotal && posTotal <= opEndTotal) {
-                    posTotal = opEndTotal;
+                if (posTotal <= 10) {
+                    posTotal = 0;
                 } 
                 posTotal -= 10;
-                if (posTotal < 0) {
-                    posTotal = 0;
+                if (isInInterval) {
+                    posTotal = opEndTotal;
+                    posTotal -= 10;
                 }
+                
             } else if (command1.equals("next")) {
-                if (posTotal >= opStartTotal && posTotal <= opEndTotal) {
-                    posTotal = opEndTotal;
-                }
-                posTotal += 10;
-                if (videoLenTotal < posTotal) {
+                if (videoLenTotal - posTotal < 10) {
                     posTotal = videoLenTotal;
-                }
-                if (opStartTotal <= posTotal && posTotal <= opEndTotal) {
+                } 
+                posTotal += 10;
+                if (isInInterval) {
                     posTotal = opEndTotal;
+                    posTotal += 10;
                 }
             }
         }
