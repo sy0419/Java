@@ -3,7 +3,7 @@ public class ReEx003_evenOdd {
         System.out.println(solution(3));
         System.out.println(solution(4));
     }
-    
+
     public static String solution(int num) {
         String result = "";
         if (num % 2 == 1) {
