@@ -10,7 +10,6 @@ public class ReEx017_FindKim {
                 index = i;
             }
         }
-
         return String.format("Kim is in %d.", index);
     }
 }
