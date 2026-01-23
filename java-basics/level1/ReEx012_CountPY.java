@@ -17,7 +17,6 @@ public class ReEx012_CountPY {
                 yCount++;
             } 
         }
-
         return pCount == yCount;
     }
 }
