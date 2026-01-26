@@ -11,7 +11,6 @@ public class ReEx025_SortStringDesc {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
             arrList.add(String.valueOf(s.charAt(i)));
         }
         Collections.sort(arrList);
