@@ -16,7 +16,7 @@ public class ReEx058_babblingCount {
                 boolean found = false;
 
                 for (String sound: sounds) {
-                    if (word.startsWith(sound) && sound != last) {
+                    if (word.startsWith(sound) && !sound.equals(last)) {
                         word = word.substring(sound.length());
                         last = sound;
                         found = true;
