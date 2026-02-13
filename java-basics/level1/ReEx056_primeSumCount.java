@@ -12,7 +12,7 @@ public class ReEx056_primeSumCount {
                 for (int k = j + 1; k < nums.length; k++) {
                     int sum = nums[i] + nums[j] + nums[k];
 
-                    if (sum % 2 != 0 && sum % 3 != 0) {
+                    if (isPrime(sum)) {
                         result++;
                     }
                 }
@@ -20,5 +20,19 @@ public class ReEx056_primeSumCount {
         }
 
         return result;
+    }
+
+    public static boolean isPrime(int num) {
+        if (num < 2) {
+            return false;
+        } 
+        
+        for (int i = 2; i * i <= num; i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
