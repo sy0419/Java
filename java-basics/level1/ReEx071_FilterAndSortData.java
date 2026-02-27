@@ -25,9 +25,9 @@ public class ReEx071_FilterAndSortData {
 
         List<int[]> filtered = new ArrayList<>();
         
-        for (int i = 0; i < data.length; i++) {
-            if (data[i][exdIndex] < val_ext) {
-                filtered.add(data[i]);
+        for (int[] data1 : data) {
+            if (data1[exdIndex] < val_ext) {
+                filtered.add(data1);
             }
         }
 
