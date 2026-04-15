@@ -35,14 +35,11 @@ public class ReEx080_RobotDogParkWalk {
             int dr = 0;
             int dc = 0;
             
-            if (direction.equals("N")) {
-                dr = -1;
-            } else if (direction.equals("S")) {
-                dr = +1;
-            } else if (direction.equals("W")) {
-                dc = -1;
-            } else {
-                dc = +1;
+            switch (direction) {
+                case "N" -> dr = -1;
+                case "S" -> dr = +1;
+                case "W" -> dc = -1;
+                default -> dc = +1;
             }
 
             int nr = row;
