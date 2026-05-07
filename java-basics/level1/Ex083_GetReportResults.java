@@ -66,10 +66,8 @@ import java.util.Set;
 
 public class Ex083_GetReportResults {
     public static void main(String[] args) {
-        // 테스트 케이스 1 # Test case 1
         System.out.println(Arrays.toString(solution(new String[] {"muzi", "frodo", "apeach", "neo"},
                 new String[] {"muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"}, 2)));
-        // 테스트 케이스 2 # Test case 2
         System.out.println(Arrays.toString(solution(new String[] {"con", "ryan"},
                 new String[] {"ryan con", "ryan con", "ryan con", "ryan con"}, 3)));
     }
