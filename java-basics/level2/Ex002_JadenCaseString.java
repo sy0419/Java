@@ -24,19 +24,19 @@ public class Ex002_JadenCaseString {
 
     public static String solution(String s) {
 
-        // 문자열을 문자 배열로 변환 / Convert string to char array
+        // 문자열을 문자 배열로 변환 # Convert string to char array
         char[] arr = s.toCharArray();
 
-        // 결과 저장용 문자열 빌더 / StringBuilder for result
+        // 결과 저장용 문자열 빌더 # StringBuilder for result
         StringBuilder sb = new StringBuilder();
 
-        // 현재 문자가 단어 시작인지 여부 / Indicates whether current char is word start
+        // 현재 문자가 단어 시작인지 여부 # Indicates whether current char is word start
         boolean isStart = true;
 
-        // 문자 하나씩 순회 / Traverse each character
+        // 문자 하나씩 순회 # Traverse each character
         for (char c : arr) {
 
-            // 공백이면 그대로 추가 후 다음 문자를 단어 시작으로 설정
+            // 공백이면 그대로 추가 후 다음 문자를 단어 시작으로 설정 
             // If space, append as-is and mark next char as word start
             if (c == ' ') {
                 sb.append(c);
@@ -57,7 +57,7 @@ public class Ex002_JadenCaseString {
             }
         }
 
-        // 최종 문자열 반환 / Return final converted string
+        // 최종 문자열 반환 # Return final converted string
         return sb.toString();
     }
 }
