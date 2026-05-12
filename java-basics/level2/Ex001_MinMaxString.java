@@ -25,50 +25,50 @@ public class Ex001_MinMaxString {
     }
 
     public static String solution(String s) {
-        // 문자열을 공백 기준으로 분리 / Split string by spaces
+        // 문자열을 공백 기준으로 분리 # Split string by spaces
         String[] parts = s.split(" ");
 
-        // 첫 번째 값을 기준으로 최소/최대 초기화 / Initialize min/max with first element
+        // 첫 번째 값을 기준으로 최소/최대 초기화 # Initialize min/max with first element
         int min = Integer.parseInt(parts[0]);
         int max = Integer.parseInt(parts[0]);
 
-        // 모든 값을 순회하면서 직접 비교 / Traverse all values and compare manually
+        // 모든 값을 순회하면서 직접 비교 # Traverse all values and compare manually
         for (String part : parts) {
             int num = Integer.parseInt(part);
 
-            // 현재 값이 더 작으면 최소값 갱신 / Update min if current value is smaller
+            // 현재 값이 더 작으면 최소값 갱신 # Update min if current value is smaller
             if (num < min) {
                 min = num;
             }
 
-            // 현재 값이 더 크면 최대값 갱신 / Update max if current value is larger
+            // 현재 값이 더 크면 최대값 갱신 # Update max if current value is larger
             if (num > max) {
                 max = num;
             }
         }
 
-        // 결과 문자열 반환 / Return result as formatted string
+        // 결과 문자열 반환 # Return result as formatted string
         return min + " " + max;
     }
 
     public static String solution2(String s) {
-        // 문자열을 공백 기준으로 분리 / Split string by spaces
+        // 문자열을 공백 기준으로 분리 # Split string by spaces
         String[] parts = s.split(" ");
 
-        // 첫 번째 값을 기준으로 최소/최대 초기화 / Initialize min/max with first element
+        // 첫 번째 값을 기준으로 최소/최대 초기화 # Initialize min/max with first element
         int min = Integer.parseInt(parts[0]);
         int max = Integer.parseInt(parts[0]);
 
-        // Math 클래스를 이용한 간결한 방식 / Cleaner approach using Math class
+        // Math 클래스를 이용한 간결한 방식 # Cleaner approach using Math class
         for (String part : parts) {
             int num = Integer.parseInt(part);
 
-            // Math.min / Math.max로 한 줄 처리 / One-line update using Math.min/max
+            // Math.min / Math.max로 한 줄 처리 # One-line update using Math.min/max
             min = Math.min(min, num);
             max = Math.max(max, num);
         }
 
-        // 결과 문자열 반환 / Return formatted result string
+        // 결과 문자열 반환 # Return formatted result string
         return min + " " + max;
     }
 }
