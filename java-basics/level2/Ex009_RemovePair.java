@@ -1,0 +1,74 @@
+// 짝지어 제거하기
+
+// 짝지어 제거하기는, 알파벳 소문자로 이루어진 문자열을 가지고 시작합니다. 
+// 먼저 문자열에서 같은 알파벳이 2개 붙어 있는 짝을 찾습니다. 
+// 그다음, 그 둘을 제거한 뒤, 앞뒤로 문자열을 이어 붙입니다. 
+// 이 과정을 반복해서 문자열을 모두 제거한다면 짝지어 제거하기가 종료됩니다. 
+// 문자열 S가 주어졌을 때, 짝지어 제거하기를 성공적으로 수행할 수 있는지 반환하는 함수를 완성해 주세요. 
+// 성공적으로 수행할 수 있으면 1을, 아닐 경우 0을 리턴해주면 됩니다.
+
+// 예를 들어, 문자열 S = baabaa 라면
+// b aa baa → bb aa → aa → 
+// 의 순서로 문자열을 모두 제거할 수 있으므로 1을 반환합니다.
+
+// 제한사항
+// 문자열의 길이 : 1,000,000이하의 자연수
+// 문자열은 모두 소문자로 이루어져 있습니다.
+
+// 입출력 예
+//   s	    result
+// baabaa	  1
+//  cdcd	  0
+
+// 입출력 예 설명
+// 입출력 예 #1
+// 위의 예시와 같습니다.
+
+// 입출력 예 #2
+// 문자열이 남아있지만 짝지어 제거할 수 있는 문자열이 더 이상 존재하지 않기 때문에 0을 반환합니다.
+
+import java.util.Stack;
+
+public class Ex009_RemovePair {
+    public static void main(String[] args) {
+        System.out.println(solution("baabaa"));
+        System.out.println(solution("cdcd"));
+    }
+
+    public static int solution(String s) {
+
+        // 문자 저장을 위한 스택 생성 # Create stack to store characters
+        Stack<Character> sk = new Stack<>();
+
+        // 문자열 전체 탐색 # Traverse entire string
+        for (int i = 0; i < s.length(); i++) {
+
+            // 스택이 비어있다면 현재 문자 저장 # Push current character if stack is empty
+            if(sk.isEmpty()) {
+                sk.add(s.charAt(i));
+
+            } else {
+
+                // 스택 top과 현재 문자가 같다면 제거
+                // Remove pair if top character matches current character
+                if(sk.peek() == s.charAt(i)) {
+                    sk.pop();
+
+                } else {
+
+                    // 다른 문자라면 스택에 추가
+                    // Push current character if characters are different
+                    sk.push(s.charAt(i));
+                }
+            }
+        }
+
+        // 스택이 비어있으면 문자열 제거 성공 # Return 1 if stack is empty
+        if (sk.isEmpty()) {
+            return 1;
+        }
+
+        // 문자열이 남아있으면 제거 실패 # Return 0 if characters remain
+        return 0;
+    }
+}
