@@ -58,8 +58,7 @@ public class Ex011_JumpAndTeleport {
         // 목적지에서 0까지 역추적 # Trace backward from destination to 0
         while(n != 0) {
 
-            // 현재 위치가 홀수라면 1칸 점프 필요
-            // If current position is odd, one jump is required
+            // 현재 위치가 홀수라면 1칸 점프 필요 # If current position is odd, one jump is required
             if (n % 2 == 1) {
 
                 // 배터리 사용량 증가 # Increase battery usage
@@ -70,8 +69,7 @@ public class Ex011_JumpAndTeleport {
 
             } else {
 
-                // 짝수라면 순간이동 역추적 가능
-                // If current position is even, teleport backward by dividing by 2
+                // 짝수라면 순간이동 역추적 가능 # If current position is even, teleport backward by dividing by 2
                 n = n / 2;
             }
         }
