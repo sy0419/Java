@@ -31,22 +31,42 @@ public class Ex012_Lifeboat {
     }
 
     public static int solution(int[] people, int limit) {
+
+        // 몸무게 오름차순 정렬 # Sort weights in ascending order
         Arrays.sort(people);
+
+        // 사용한 보트 개수 저장 # Store number of boats used
         int boat = 0;
+
+        // 가장 가벼운 사람 index # Index of lightest person
         int left = 0;
+
+        // 가장 무거운 사람 index # Index of heaviest person
         int right = people.length - 1;
 
+        // 모든 사람이 보트를 탈 때까지 반복
+        // Repeat until all people are assigned to boats
         while(left <= right) {
+
+            // 가장 가벼운 사람과 무거운 사람이 함께 탈 수 있는 경우
+            // If lightest and heaviest person can ride together
             if (people[left] + people[right] <= limit) {
-                boat++;
+
+                // 두 사람 함께 탑승 처리 # Move both pointers
                 left++;
                 right--;
+
             } else {
-                boat++;
+
+                // 무거운 사람 혼자 탑승 # Heaviest person rides alone
                 right--;
             }
+
+            // 보트 사용 개수 증가 # Increase boat count
+            boat++;
         }
 
+        // 최소 보트 개수 반환 # Return minimum number of boats
         return boat;
     }
 }
