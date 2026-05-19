@@ -35,23 +35,34 @@ public class Ex016_LongJump {
         System.out.println(solution(4));
         System.out.println(solution(3));
     }
-    
+
     public static int solution(int n) {
+
+        // n이 1이면 방법 1개 반환 # Return 1 if n is 1
         if (n == 1) {
             return 1;
-        } 
+        }
+
+        // n이 2이면 방법 2개 반환 # Return 2 if n is 2
         if (n == 2) {
             return 2;
-        } 
+        }
 
-        int dp[] = new int[n+1];
+        // DP 배열 생성 # Create DP array
+        int[] dp = new int[n + 1];
+
+        // 초기값 설정 # Set base cases
         dp[1] = 1;
         dp[2] = 2;
 
+        // 3부터 n까지 경우의 수 계산 # Calculate number of ways from 3 to n
         for (int i = 3; i <= n; i++) {
-            dp[i] = (dp[i - 2] + dp[i - 1]) % 1234567;
-        }       
 
+            // 이전 두 경우의 수를 더하고 나머지 연산 적용 # Add previous two cases and apply modulo
+            dp[i] = (dp[i - 2] + dp[i - 1]) % 1234567;
+        }
+
+        // n칸 도달 방법 수 반환 # Return number of ways to reach n
         return dp[n];
     }
 }
