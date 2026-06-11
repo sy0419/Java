@@ -90,17 +90,20 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Ex030_RollCakeTopping {
+    public static void main(String[] args) {
+        System.out.println(solution(new int[] {1, 2, 1, 3, 1, 4, 1, 2}));
+        System.out.println(solution(new int[] {1, 2, 3, 1, 4}));
+    }
 
     public static int solution(int[] toppings) {
-
-        HashSet<Integer> leftRollCake = new HashSet<>();
         // 왼쪽 롤케이크 토핑 종류 저장 # Store topping types on the left roll cake
-
-        HashMap<Integer, Integer> rightRollCake = new HashMap<>();
+        HashSet<Integer> leftRollCake = new HashSet<>();
+        
         // 오른쪽 롤케이크 토핑 개수 저장 # Store topping counts on the right roll cake
-
-        int answer = 0;
+        HashMap<Integer, Integer> rightRollCake = new HashMap<>();
+        
         // 공평하게 자르는 경우의 수 # Number of fair split cases
+        int answer = 0;
 
         // 오른쪽 롤케이크 전체 토핑 개수 저장 # Store total topping counts on the right roll cake
         for (int topping : toppings) {
