@@ -36,35 +36,97 @@
 // 입출력 예 #2
 // 롤케이크를 공평하게 나눌 수 없습니다.
 
+// [English Translation]
+
+// Roll Cake Cutting
+
+// Cheolsu wants to split a roll cake into two pieces and share one piece with his younger sibling.
+// This roll cake has several kinds of toppings arranged in a line.
+// Cheolsu and his sibling want to divide the roll cake fairly,
+// but they care more about the variety of toppings than the size of the cake.
+// Therefore, regardless of the size of the pieces or the number of toppings,
+// they consider the cake fairly divided if both pieces contain the same number of topping types.
+
+// For example, suppose the roll cake has 4 types of toppings.
+// If the toppings are labeled as 1, 2, 3, and 4,
+// the toppings are arranged in the order [1, 2, 1, 3, 1, 4, 1, 2].
+// If the cake is cut between the third topping (1) and the fourth topping (3),
+// the cake becomes [1, 2, 1] and [3, 1, 4, 1, 2].
+// In this case, Cheolsu can taste two topping types (1, 2),
+// while the sibling can taste four topping types (1, 2, 3, 4),
+// so this is not considered a fair split.
+// If the cake is cut between the fourth topping (3) and the fifth topping (1),
+// it becomes [1, 2, 1, 3] and [1, 4, 1, 2].
+// In this case, both Cheolsu and the sibling can taste three topping types,
+// so this is considered a fair split.
+// There may be multiple ways to divide the roll cake fairly.
+// For example, cutting the cake into [1, 2, 1, 3, 1] and [4, 1, 2]
+// is also considered fair.
+// In some cases, it may not be possible to divide the cake fairly.
+
+// Given an integer array topping representing the toppings on the roll cake,
+// complete the solution function to return the number of ways to split the cake fairly.
+
+// Constraints
+// 1 ≤ topping.length ≤ 1,000,000
+// 1 ≤ topping[i] ≤ 10,000
+
+// Examples
+//        topping	            result
+// [1, 2, 1, 3, 1, 4, 1, 2]	      2
+//    [1, 2, 3, 1, 4]	          0
+
+// Example Explanation
+// Example #1
+// If the cake is cut into [1, 2, 1, 3], [1, 4, 1, 2]
+// or [1, 2, 1, 3, 1], [4, 1, 2],
+// both Cheolsu and the sibling can taste three topping types.
+// Therefore, there are exactly two fair ways to split the cake.
+
+// Example #2
+// It is impossible to divide the roll cake fairly.
+
 import java.util.HashMap;
 import java.util.HashSet;
 
 public class Ex030_RollCakeTopping {
-    public static void main(String[] args) {
-        System.out.println(solution(new int[] {1, 2, 1, 3, 1, 4, 1, 2}));
-        System.out.println(solution(new int[] {1, 2, 3, 1, 4}));
-    }
 
     public static int solution(int[] toppings) {
+
         HashSet<Integer> leftRollCake = new HashSet<>();
+        // 왼쪽 롤케이크 토핑 종류 저장 # Store topping types on the left roll cake
+
         HashMap<Integer, Integer> rightRollCake = new HashMap<>();
+        // 오른쪽 롤케이크 토핑 개수 저장 # Store topping counts on the right roll cake
 
         int answer = 0;
+        // 공평하게 자르는 경우의 수 # Number of fair split cases
 
-        for (int topping: toppings) {
+        // 오른쪽 롤케이크 전체 토핑 개수 저장 # Store total topping counts on the right roll cake
+        for (int topping : toppings) {
             rightRollCake.put(topping, rightRollCake.getOrDefault(topping, 0) + 1);
         }
 
+        // 토핑을 하나씩 왼쪽으로 이동 # Move toppings one by one to the left
         for (int topping : toppings) {
+
+            // 오른쪽 토핑 개수 감소 # Decrease topping count on the right side
             rightRollCake.put(topping, rightRollCake.get(topping) - 1);
+
+            // 토핑 개수가 0이면 제거 # Remove topping if count becomes zero
             if (rightRollCake.get(topping) == 0) {
                 rightRollCake.remove(topping);
             }
+
+            // 왼쪽에 토핑 종류 추가 # Add topping type to the left side
             leftRollCake.add(topping);
+
+            // 양쪽 토핑 종류 수가 같으면 경우의 수 증가 # Increase count if both sides have the same number of topping types
             if (leftRollCake.size() == rightRollCake.size()) {
                 answer++;
             }
         }
+
         return answer;
     }
 }
