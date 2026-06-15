@@ -28,7 +28,7 @@
 
 
 // Vowel Dictionary
-//
+
 // The dictionary contains all possible words of length 5 or less
 // made using only the vowels 'A', 'E', 'I', 'O', 'U'.
 // The first word in the dictionary is "A", followed by "AA",
@@ -52,16 +52,13 @@
 // The first word in the dictionary is "A",
 // followed by "AA", "AAA", "AAAA", "AAAAA", "AAAAE", ... .
 // "AAAAE" is the 6th word in the dictionary.
-//
 // Example #2
 // "AAAE" comes after:
 // "A", "AA", "AAA", "AAAA", "AAAAA", "AAAAE",
 // "AAAAI", "AAAAO", "AAAAU".
 // Therefore, it is the 10th word.
-//
 // Example #3
 // "I" is the 1563rd word.
-//
 // Example #4
 // "EIO" is the 1189th word.
 
