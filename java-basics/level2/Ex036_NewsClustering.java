@@ -1,3 +1,75 @@
+// News Clustering
+
+// When reading the flood of news articles from various media outlets,
+// especially breaking news, there are often many articles with very similar titles,
+// making it difficult to find the articles that users actually need.
+// Tube, a new employee responsible for developing Daum News,
+// was assigned the task of improving this issue so that users could conveniently browse various news articles.
+// To determine the direction of development, Tube first searched for articles related to
+// "Kakao's Recruitment of New Developers", which had recently become a hot topic.
+
+// Kakao's first open recruitment... Hiring through a 'blind' process
+// Kakao's first open recruitment after the merger... Recruiting developers through a blind screening process
+// Kakao recruits new developers through a blind screening process
+// Kakao open recruitment evaluates only coding ability of new developers
+// Kakao's new recruitment... "Only coding skills matter"
+// Kakao: "We will hire new developers in 2018 based solely on coding ability."
+// Tube noticed that the articles could be divided into those focusing on
+// the "blind screening process" and those focusing on the "coding test."
+// He thought that grouping them accordingly would be useful for users searching for articles related to Kakao's recruitment.
+
+// While researching papers and materials to establish criteria for grouping similar articles,
+// Tube discovered a method called "Jaccard Similarity."
+// Jaccard similarity is one of several methods used to measure the similarity between sets.
+// The Jaccard similarity J(A, B) between two sets A and B is defined as
+// the size of their intersection divided by the size of their union.
+// For example, let A = {1, 2, 3} and B = {2, 3, 4}.
+// Then A ∩ B = {2, 3} and A ∪ B = {1, 2, 3, 4},
+// so J(A, B) = 2 / 4 = 0.5.
+// If both sets are empty, division is undefined,
+// so J(A, B) is defined as 1 in that case.
+// Jaccard similarity can be extended to multisets that allow duplicate elements.
+// Suppose multiset A contains three occurrences of "1",
+// and multiset B contains five occurrences of "1".
+// Then A ∩ B contains min(3, 5) = 3 occurrences of "1",
+// and A ∪ B contains max(3, 5) = 5 occurrences of "1".
+// If A = {1, 1, 2, 2, 3} and B = {1, 2, 2, 4, 5},
+// then A ∩ B = {1, 2, 2} and A ∪ B = {1, 1, 2, 2, 3, 4, 5},
+// so J(A, B) = 3 / 7 ≈ 0.42.
+
+// This method can also be used to calculate similarity between strings.
+// Given the strings "FRANCE" and "FRENCH",
+// we can create multisets by splitting them into two-character substrings.
+// The resulting multisets are
+// {FR, RA, AN, NC, CE} and {FR, RE, EN, NC, CH}.
+// Their intersection is {FR, NC},
+// and their union is {FR, RA, AN, NC, CE, RE, EN, CH},
+// so J("FRANCE", "FRENCH") = 2 / 8 = 0.25.
+
+// Input Format
+// The input consists of two strings, str1 and str2.
+// The length of each string is between 2 and 1,000.
+// Each string is split into two-character substrings to form a multiset.
+// Only pairs consisting entirely of alphabetic characters are considered valid.
+// Any pair containing spaces, digits, or special characters is discarded.
+// For example, if the input is "ab+",
+// only "ab" is included in the multiset, and "b+" is discarded.
+// When comparing multiset elements,
+// uppercase and lowercase letters are treated as the same.
+// "AB", "Ab", and "ab" are considered identical.
+
+// Output Format
+// Output the Jaccard similarity of the two input strings.
+// Since the similarity value is a real number between 0 and 1,
+// multiply it by 65536, discard the fractional part,
+// and return only the integer part.
+
+// Example Input and Output
+//   str1          str2          answer
+//  FRANCE        french         16384
+// handshake   shake hands       65536
+//  aa1+aa2       AAAA12         43690
+//  E=M*C^2      e=m*c^2         65536
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -5,59 +77,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-// 뉴스 클러스터링
-
-// 여러 언론사에서 쏟아지는 뉴스, 특히 속보성 뉴스를 보면 비슷비슷한 제목의 기사가 많아 정작 필요한 기사를 찾기가 어렵다. 
-// Daum 뉴스의 개발 업무를 맡게 된 신입사원 튜브는 사용자들이 편리하게 다양한 뉴스를 찾아볼 수 있도록 문제점을 개선하는 업무를 맡게 되었다.
-// 개발의 방향을 잡기 위해 튜브는 우선 최근 화제가 되고 있는 "카카오 신입 개발자 공채" 관련 기사를 검색해보았다.
-
-// 카카오 첫 공채..'블라인드' 방식 채용
-// 카카오, 합병 후 첫 공채.. 블라인드 전형으로 개발자 채용
-// 카카오, 블라인드 전형으로 신입 개발자 공채
-// 카카오 공채, 신입 개발자 코딩 능력만 본다
-// 카카오, 신입 공채.. "코딩 실력만 본다"
-// 카카오 "코딩 능력만으로 2018 신입 개발자 뽑는다"
-// 기사의 제목을 기준으로 "블라인드 전형"에 주목하는 기사와 "코딩 테스트"에 주목하는 기사로 나뉘는 걸 발견했다. 
-// 튜브는 이들을 각각 묶어서 보여주면 카카오 공채 관련 기사를 찾아보는 사용자에게 유용할 듯싶었다.
-
-// 유사한 기사를 묶는 기준을 정하기 위해서 논문과 자료를 조사하던 튜브는 "자카드 유사도"라는 방법을 찾아냈다.
-// 자카드 유사도는 집합 간의 유사도를 검사하는 여러 방법 중의 하나로 알려져 있다. 
-// 두 집합 A, B 사이의 자카드 유사도 J(A, B)는 두 집합의 교집합 크기를 두 집합의 합집합 크기로 나눈 값으로 정의된다.
-// 예를 들어 집합 A = {1, 2, 3}, 집합 B = {2, 3, 4}라고 할 때, 
-// 교집합 A ∩ B = {2, 3}, 합집합 A ∪ B = {1, 2, 3, 4}이 되므로, 
-// 집합 A, B 사이의 자카드 유사도 J(A, B) = 2/4 = 0.5가 된다. 
-// 집합 A와 집합 B가 모두 공집합일 경우에는 나눗셈이 정의되지 않으니 따로 J(A, B) = 1로 정의한다.
-// 자카드 유사도는 원소의 중복을 허용하는 다중집합에 대해서 확장할 수 있다. 
-// 다중집합 A는 원소 "1"을 3개 가지고 있고, 다중집합 B는 원소 "1"을 5개 가지고 있다고 하자. 
-// 이 다중집합의 교집합 A ∩ B는 원소 "1"을 min(3, 5)인 3개, 합집합 A ∪ B는 원소 "1"을 max(3, 5)인 5개 가지게 된다. 
-// 다중집합 A = {1, 1, 2, 2, 3}, 다중집합 B = {1, 2, 2, 4, 5}라고 하면, 
-// 교집합 A ∩ B = {1, 2, 2}, 합집합 A ∪ B = {1, 1, 2, 2, 3, 4, 5}가 되므로, 
-// 자카드 유사도 J(A, B) = 3/7, 약 0.42가 된다.
-
-// 이를 이용하여 문자열 사이의 유사도를 계산하는데 이용할 수 있다. 
-// 문자열 "FRANCE"와 "FRENCH"가 주어졌을 때, 이를 두 글자씩 끊어서 다중집합을 만들 수 있다. 
-// 각각 {FR, RA, AN, NC, CE}, {FR, RE, EN, NC, CH}가 되며, 
-// 교집합은 {FR, NC}, 합집합은 {FR, RA, AN, NC, CE, RE, EN, CH}가 되므로, 
-// 두 문자열 사이의 자카드 유사도 J("FRANCE", "FRENCH") = 2/8 = 0.25가 된다.
-
-// 입력 형식
-// 입력으로는 str1과 str2의 두 문자열이 들어온다. 각 문자열의 길이는 2 이상, 1,000 이하이다.
-// 입력으로 들어온 문자열은 두 글자씩 끊어서 다중집합의 원소로 만든다. 
-// 이때 영문자로 된 글자 쌍만 유효하고, 기타 공백이나 숫자, 특수 문자가 들어있는 경우는 그 글자 쌍을 버린다. 
-// 예를 들어 "ab+"가 입력으로 들어오면, "ab"만 다중집합의 원소로 삼고, "b+"는 버린다.
-// 다중집합 원소 사이를 비교할 때, 대문자와 소문자의 차이는 무시한다. "AB"와 "Ab", "ab"는 같은 원소로 취급한다.
-
-// 출력 형식
-// 입력으로 들어온 두 문자열의 자카드 유사도를 출력한다. 유사도 값은 0에서 1 사이의 실수이므로, 
-// 이를 다루기 쉽도록 65536을 곱한 후에 소수점 아래를 버리고 정수부만 출력한다.
-
-// 예제 입출력
-//   str1	        str2	    answer
-//  FRANCE	       french	    16384
-// handshake	shake hands	    65536
-//  aa1+aa2	       AAAA12	    43690
-//  E=M*C^2	      e=m*c^2	    65536
 
 public class Ex036_NewsClustering {
     public static void main(String[] args) {
@@ -68,53 +87,78 @@ public class Ex036_NewsClustering {
     }
 
     public static int solution(String str1, String str2) {
+        // 문자열 비교 시 대소문자를 무시하기 위해 모두 소문자로 변환 
+        // # Convert both strings to lowercase to ignore case differences
         str1 = str1.toLowerCase();
         str2 = str2.toLowerCase();
 
+        // 두 문자열의 다중집합을 저장할 리스트 # Lists to store the multisets of the two strings
         List<String> list1 = new ArrayList<>();
         List<String> list2 = new ArrayList<>();
 
+        // str1을 두 글자씩 잘라 다중집합 생성 # Create a multiset by slicing str1 into two-character substrings
         for (int i = 0; i < str1.length() - 1; i++) {
             String s1 = str1.substring(i, i + 2);
+
+            // 두 글자를 하나씩 꺼내 영문자인지 검사 # Extract each character and check whether both are alphabetic
             char c1 = s1.charAt(0);
             char c2 = s1.charAt(1);
+
+            // 두 문자 모두 영문자인 경우에만 다중집합에 추가 
+            // # Add to the multiset only if both characters are alphabetic
             if ('a' <= c1 && c1 <= 'z' && 'a' <= c2 && c2 <= 'z') {
                 list1.add(s1);
             }
         }
 
+        // str2를 두 글자씩 잘라 다중집합 생성 # Create a multiset by slicing str2 into two-character substrings
         for (int i = 0; i < str2.length() - 1; i++) {
             String s2 = str2.substring(i, i + 2);
+
+            // 두 글자를 하나씩 꺼내 영문자인지 검사 # Extract each character and check whether both are alphabetic
             char c1 = s2.charAt(0);
             char c2 = s2.charAt(1);
+
+            // 두 문자 모두 영문자인 경우에만 다중집합에 추가 
+            // # Add to the multiset only if both characters are alphabetic
             if ('a' <= c1 && c1 <= 'z' && 'a' <= c2 && c2 <= 'z') {
                 list2.add(s2);
             }
         }
 
-        Map<String, Integer> map1 = new HashMap<>();        
+        // 각 문자열 원소의 등장 횟수를 저장할 맵 # Maps to store the frequency of each element
+        Map<String, Integer> map1 = new HashMap<>();
         Map<String, Integer> map2 = new HashMap<>();
+
+        // 교집합 크기 저장 # Store the size of the intersection
         int intersection = 0;
 
+        // list1의 원소 개수 세기 # Count the frequency of elements in list1
         for (String s : list1) {
             map1.put(s, map1.getOrDefault(s, 0) + 1);
         }
 
+        // list2의 원소 개수 세기 # Count the frequency of elements in list2
         for (String s : list2) {
             map2.put(s, map2.getOrDefault(s, 0) + 1);
         }
 
+        // 교집합 크기 계산 (min 사용) # Calculate the intersection size using the minimum frequency
         for (String key : map1.keySet()) {
             if (map2.containsKey(key)) {
-                intersection += Math.min(map1.get(key),map2.get(key));
+                intersection += Math.min(map1.get(key), map2.get(key));
             }
         }
-        
+
+        // 합집합에 존재하는 모든 원소를 중복 없이 저장 # Store all unique elements that exist in either multiset
         Set<String> set = new HashSet<>();
         set.addAll(map1.keySet());
         set.addAll(map2.keySet());
+
+        // 합집합 크기 저장 # Store the size of the union
         int union = 0;
 
+        // 합집합 크기 계산 (max 사용) # Calculate the union size using the maximum frequency
         for (String key : set) {
             union += Math.max(
                     map1.getOrDefault(key, 0),
@@ -122,11 +166,16 @@ public class Ex036_NewsClustering {
             );
         }
 
+        // 두 다중집합이 모두 공집합인 경우 자카드 유사도는 1 
+        // # If both multisets are empty, Jaccard similarity is defined as 1
         if (union == 0) {
             return 65536;
         }
 
+        // 자카드 유사도 계산 # Calculate the Jaccard similarity
         double j = (double) intersection / union;
-        return (int)(j * 65536);
+
+        // 문제 조건에 따라 65536을 곱한 후 정수 반환 # Multiply by 65536 and return the integer part
+        return (int) (j * 65536);
     }
 }
