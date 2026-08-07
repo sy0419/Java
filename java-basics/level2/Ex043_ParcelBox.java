@@ -1,4 +1,4 @@
-// 댁배상자
+// 택배상자
 
 // 영재는 택배상자를 트럭에 싣는 일을 합니다. 
 // 영재가 실어야 하는 택배상자는 크기가 모두 같으며 1번 상자부터 n번 상자까지 번호가 증가하는 순서대로 컨테이너 벨트에 
@@ -31,14 +31,53 @@
 // order[i]는 기존의 컨테이너 벨트에 order[i]번째 상자를 i+1번째로 트럭에 실어야 함을 의미합니다.
 
 // 입출력 예
-// order	result
-// [4, 3, 1, 2, 5]	2
-// [5, 4, 3, 2, 1]	5
+//     order	   result
+// [4, 3, 1, 2, 5]	 2
+// [5, 4, 3, 2, 1]	 5  
+
 // 입출력 예 설명
 // 입출력 예 #1
 // 문제 예시와 같습니다.
 // 입출력 예 #2
 // 모든 상자를 보조 컨테이너 벨트에 모두 넣고, 역순으로 하나씩 빼서 트럭에 싣습니다.
+
+// Parcel Box
+
+// Youngjae loads delivery boxes onto a truck.
+// The boxes are all the same size and are placed in increasing numerical order from box 1 to box n on the main conveyor belt.
+// Since the main conveyor belt moves in only one direction, boxes can only be unloaded in their original order, starting from box 1.
+// However, loading the boxes directly onto the truck in this order would cause problems because the delivery order would not match the order in which the boxes are loaded.
+// Therefore, Youngjae must load the boxes according to the order provided by the delivery driver.
+// If the box at the front of the main conveyor belt is not the box that needs to be loaded next, it must be temporarily stored until its turn comes.
+// Since the boxes cannot be placed directly on the ground, an auxiliary conveyor belt is provided for temporary storage.
+// The auxiliary conveyor belt can move back and forth, but all sides except the entrance are blocked, so only the box at the front can be removed.
+// In other words, the box stored most recently on the auxiliary conveyor belt must be removed first.
+// If the required order cannot be achieved even with the auxiliary conveyor belt, Youngjae stops loading boxes.
+
+// For example, suppose Youngjae needs to load five boxes, and the order given by the delivery driver is 4, 3, 1, 2, 5.
+// Youngjae first stores boxes 1, 2, and 3 on the auxiliary conveyor belt.
+// Then he loads box 4 onto the truck and removes box 3 from the auxiliary conveyor belt.
+// Next, box 1 needs to be loaded, but box 2 is at the front of the auxiliary conveyor belt and box 5 is at the front of the main conveyor belt.
+// Therefore, no more boxes can be loaded, and only two boxes are loaded onto the truck.
+
+// Given an integer array order representing the order in which the delivery driver wants the boxes to be loaded,
+// complete the solution function to return the number of boxes Youngjae can load onto the truck.
+
+// Constraints
+// 1 ≤ order.length ≤ 1,000,000
+// Every integer from 1 to order.length appears exactly once in order.
+// order[i] means that box order[i] from the main conveyor belt must be loaded onto the truck at the (i + 1)th position.
+
+// Examples
+//     order	   result
+// [4, 3, 1, 2, 5]	 2
+// [5, 4, 3, 2, 1]	 5  
+
+// Example Explanation
+// Example 1
+// Same as the example described above.
+// Example 2
+// All boxes are placed on the auxiliary conveyor belt and then removed one by one in reverse order.
 
 import java.util.Stack;
 
@@ -49,27 +88,29 @@ public class Ex043_ParcelBox {
     }
 
     public static int solution(int[] order) {
-        int result = 0;
-        Stack<Integer> stack = new Stack<>();
-        int box = 1;
+        int result = 0; // 실어 올린 상자 개수를 저장한다. # Store the number of loaded boxes.
+        Stack<Integer> stack = new Stack<>(); // 보조 컨테이너 벨트를 구현한다. # Implement the auxiliary conveyor belt.
+        int box = 1; // 현재 메인 컨테이너 벨트에서 확인할 상자 번호이다. # Store the current box number on the main conveyor belt.
 
         for (int i = 0; i < order.length; i++) {
-            int target = order[i];
+            int target = order[i]; // 현재 실어야 하는 상자 번호를 확인한다. # Check the box that needs to be loaded next.
+
             if (!stack.isEmpty() && stack.peek() == target) {
-                stack.pop();
+                stack.pop(); // 보조 컨테이너 벨트의 마지막 상자를 꺼낸다. # Remove the top box from the auxiliary conveyor belt.
                 result++;
                 continue;
             }
 
             if (target < box) {
-                break;
+                break; // 필요한 상자를 더 이상 꺼낼 수 없으면 종료한다. # Stop when the required box can no longer be retrieved.
             }
 
             while (target != box) {
-                stack.add(box);
+                stack.add(box); // 현재 상자를 보조 컨테이너 벨트에 보관한다. # Store the current box on the auxiliary conveyor belt.
                 box++;
             }
-            result++;
+
+            result++; // 현재 상자를 트럭에 싣는다. # Load the current box onto the truck.
             box++;
         }
 
