@@ -239,65 +239,164 @@ public class Ex046_ParkingFee {
         )));
     }
 
-    public static int[] solution(int[] fees, String[] records) {
+public static int[] solution(int[] fees, String[] records) {
+        // 기본 시간, 기본 요금, 단위 시간, 단위 요금을 저장
+        // Store the basic time, basic fee, unit time, and unit fee
         int basicTime = fees[0];
         int basicFee = fees[1];
         int unitTime = fees[2];
         int unitFee = fees[3];
 
+        // 차량번호와 현재 입차 시간을 저장
+        // Store each car number and its current entry time
         Map<String, Integer> inTime = new HashMap<>();
+
+        // 차량번호와 누적 주차 시간을 저장
+        // Store each car number and its accumulated parking time
+        // TreeMap을 사용하여 차량번호를 오름차순으로 정렬
+        // Use TreeMap to sort car numbers in ascending order
         Map<String, Integer> totalTime = new TreeMap<>();
 
+        // 계산된 주차 요금을 저장
+        // Store the calculated parking fees
         ArrayList<Integer> answer = new ArrayList<>();
-        
+
+        // 모든 입출차 기록을 순서대로 확인
+        // Process all entry and exit records in order
         for (String record1 : records) {
+
+            // 하나의 기록을 공백 기준으로 분리
+            // Split one record using spaces
             String[] record = record1.split(" ");
+
+            // 기록에서 시간, 차량번호, 입출차 상태를 각각 가져옴
+            // Get the time, car number, and entry/exit status from the record
             String time = record[0];
             String carNumber = record[1];
             String inOrOut = record[2];
-            String[] timeParts = time.split(":");
-            int minutes = Integer.parseInt(timeParts[0]) * 60 + Integer.parseInt(timeParts[1]);
 
+            // 시간 부분을 ':' 기준으로 시와 분으로 분리
+            // Split the time into hours and minutes using ':'
+            String[] timeParts = time.split(":");
+
+            // 시간을 계산하기 편하도록 전체 분으로 변환
+            // Convert the time into total minutes for easier calculation
+            int minutes = Integer.parseInt(timeParts[0]) * 60
+                    + Integer.parseInt(timeParts[1]);
+
+            // 입차 기록인 경우
+            // If the record is an entry
             if ("IN".equals(inOrOut)) {
+
+                // 해당 차량의 현재 입차 시간을 저장
+                // Store the current entry time of the car
                 inTime.put(carNumber, minutes);
             }
+
+            // 출차 기록인 경우
+            // If the record is an exit
             if ("OUT".equals(inOrOut)) {
+
+                // 해당 차량의 입차 시간을 가져옴
+                // Get the entry time of the car
                 int startTime = inTime.get(carNumber);
+
+                // 이전까지 누적된 주차 시간을 가져옴
+                // Get the parking time accumulated so far
                 int previousTime = totalTime.getOrDefault(carNumber, 0);
+
+                // 이번 입차부터 출차까지의 주차 시간을 계산
+                // Calculate the parking time for this entry-exit pair
                 int parkingTime = minutes - startTime;
 
+                // 기존 누적 시간에 이번 주차 시간을 더함
+                // Add the current parking time to the previous accumulated time
                 int total = previousTime + parkingTime;
+
+                // 계산된 누적 주차 시간을 저장
+                // Store the accumulated parking time
                 totalTime.put(carNumber, total);
+
+                // 출차했으므로 현재 입차 기록을 삭제
+                // Remove the current entry record because the car has exited
                 inTime.remove(carNumber);
             }
         }
-        for (String carNumber: inTime.keySet()) {
+
+        // 아직 출차하지 않은 차량을 확인
+        // Find cars that have not exited yet
+        for (String carNumber : inTime.keySet()) {
+
+            // 해당 차량의 마지막 입차 시간을 가져옴
+            // Get the car's last entry time
             int startTime = inTime.get(carNumber);
+
+            // 출차하지 않은 차량은 23:59에 출차한 것으로 처리
+            // Treat cars without an exit record as leaving at 23:59
             int finishedTime = 23 * 60 + 59;
+
+            // 이전까지 누적된 주차 시간을 가져옴
+            // Get the parking time accumulated so far
             int previousTime = totalTime.getOrDefault(carNumber, 0);
+
+            // 입차 시간부터 23:59까지의 주차 시간을 계산
+            // Calculate the parking time from entry until 23:59
             int parkingTime = finishedTime - startTime;
 
+            // 기존 누적 시간에 마지막 주차 시간을 더함
+            // Add the final parking time to the accumulated time
             int total = previousTime + parkingTime;
-            totalTime.put(carNumber, total);
-        } 
 
-        for (String carNumber: totalTime.keySet()) {
+            // 최종 누적 주차 시간을 저장
+            // Store the final accumulated parking time
+            totalTime.put(carNumber, total);
+        }
+
+        // 차량번호가 작은 순서대로 주차 요금을 계산
+        // Calculate parking fees in ascending order of car number
+        for (String carNumber : totalTime.keySet()) {
+
+            // 해당 차량의 누적 주차 시간을 가져옴
+            // Get the accumulated parking time of the car
             int total = totalTime.get(carNumber);
 
+            // 누적 주차 시간이 기본 시간 이하인 경우
+            // If the total parking time is within the basic time
             if (total <= basicTime) {
+
+                // 기본 요금만 청구
+                // Charge only the basic fee
                 answer.add(basicFee);
+
             } else {
+
+                // 기본 시간을 제외한 초과 주차 시간을 계산
+                // Calculate the parking time exceeding the basic time
                 int extraTime = total - basicTime;
-                int totalPayment = basicFee + ((int)Math.ceil((double) extraTime / unitTime) * unitFee);
+
+                // 초과 시간을 단위 시간으로 나누고 올림하여 추가 요금을 계산
+                // Divide the extra time by the unit time and round up to calculate the additional fee
+                int totalPayment = basicFee
+                        + ((int) Math.ceil((double) extraTime / unitTime) * unitFee);
+
+                // 계산된 최종 주차 요금을 저장
+                // Store the calculated parking fee
                 answer.add(totalPayment);
             }
         }
 
+        // ArrayList의 크기만큼 결과 배열 생성
+        // Create a result array with the same size as the ArrayList
         int[] result = new int[answer.size()];
+
+        // ArrayList의 값을 int 배열로 하나씩 복사
+        // Copy each value from the ArrayList into the int array
         for (int i = 0; i < answer.size(); i++) {
             result[i] = answer.get(i);
         }
 
+        // 차량별 주차 요금 배열 반환
+        // Return the parking fee array for each car
         return result;
     }
 }
