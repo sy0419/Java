@@ -47,25 +47,27 @@ public class Ex048_2xNTiling {
     }
 
     public static int solution(int n) {
-        int a = 1;
-        int b = 2;
+        int a = 1; // n=1일 때의 경우의 수 # Number of ways when n=1
+        int b = 2; // n=2일 때의 경우의 수 # Number of ways when n=2
+
         switch (n) {
             case 1 -> {
-                return a;
+                return a; // n=1인 경우의 수를 반환한다. # Return the number of ways when n=1
             }
             case 2 -> {
-                return b;
+                return b; // n=2인 경우의 수를 반환한다. # Return the number of ways when n=2
             }
             default -> {
                 for (int i = 3; i <= n; i++) {
+                    // 이전 두 값의 합으로 다음 경우의 수를 계산한다. # Calculate the next number of ways using the previous two values
                     int next = (a + b) % 1_000_000_007;
-                    
-                    a = b;
-                    b = next;
+
+                    a = b; // 현재 값을 이전 값으로 이동한다. # Move the current value to the previous value
+                    b = next; // 다음 값을 현재 값으로 이동한다. # Move the next value to the current value
                 }
             }
         }
-        
-        return b;
+
+        return b; // n번째 경우의 수를 반환한다. # Return the number of ways for n
     }
 }
