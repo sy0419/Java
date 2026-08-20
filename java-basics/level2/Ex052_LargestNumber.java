@@ -37,7 +37,6 @@ public class Ex052_LargestNumber {
     }
 
     public static String solution(int[] numbers) {
-        public static String solution(int[] numbers) {
         StringBuilder sb = new StringBuilder();
         String[] numbersString = new String[numbers.length];
 
