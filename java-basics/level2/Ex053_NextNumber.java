@@ -92,7 +92,6 @@ public class Ex053_NextNumber {
             // 계산된 값을 결과 배열에 저장한다. # Store the calculated value in the result array.
             result[i] = number;
         }
-        
         return result;
     }
 }
