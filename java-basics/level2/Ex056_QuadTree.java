@@ -49,10 +49,10 @@ import java.util.Arrays;
 public class Ex056_QuadTree {
     public static void main(String[] args) {
         System.out.println(Arrays.toString(solution(new int[][] {{1, 1, 0, 0}, {1, 0, 0, 0}, {1, 0, 0, 1}, {1, 1, 1, 1}})));
-        System.out.println(solution(new int[][] {{1,1,1,1,1,1,1,1}, {0,1,1,1,1,1,1,1},
-                                                 {0,0,0,0,1,1,1,1}, {0,1,0,0,1,1,1,1}, 
-                                                 {0,0,0,0,0,0,1,1}, {0,0,0,0,0,0,0,1},
-                                                 {0,0,0,0,1,0,0,1}, {0,0,0,0,1,1,1,1}}));
+        System.out.println(Arrays.toString(solution(new int[][] {{1,1,1,1,1,1,1,1}, {0,1,1,1,1,1,1,1},
+            {0,0,0,0,1,1,1,1}, {0,1,0,0,1,1,1,1},
+            {0,0,0,0,0,0,1,1}, {0,0,0,0,0,0,0,1},
+            {0,0,0,0,1,0,0,1}, {0,0,0,0,1,1,1,1}})));
     }
 
     public static int[] solution(int[][] arr) {
