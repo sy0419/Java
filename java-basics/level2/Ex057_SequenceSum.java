@@ -70,13 +70,8 @@ import java.util.Arrays;
 
 public class Ex057_SequenceSum {
     public static void main(String[] args) {
-        // 첫 번째 테스트 케이스를 실행한다. # Run the first test case.
         System.out.println(Arrays.toString(solution(new int[] {1, 2, 3, 4, 5}, 7)));
-
-        // 두 번째 테스트 케이스를 실행한다. # Run the second test case.
         System.out.println(Arrays.toString(solution(new int[] {1, 1, 1, 2, 3, 4, 5}, 5)));
-
-        // 세 번째 테스트 케이스를 실행한다. # Run the third test case.
         System.out.println(Arrays.toString(solution(new int[] {2, 2, 2, 2, 2}, 6)));
     }
 
