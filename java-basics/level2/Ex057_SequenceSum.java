@@ -18,7 +18,7 @@
 //      sequence                k          result
 //   [1, 2, 3, 4, 5]            7          [2, 3]
 // [1, 1, 1, 2, 3, 4, 5]        5          [6, 6]
-//   [2, 2, 2, 2, 2]            6          [0, 2]
+//   [2, 2, 2, 2, 2]            6         [0, 2]
 
 // 입출력 예 설명
 // 입출력 예 #1
@@ -64,77 +64,82 @@
 // Among them, [5] is the shortest, so return [6, 6].
 // Example #3
 // In [2, 2, 2, 2, 2], there are three contiguous subsequences [2, 2, 2] with a sum of 6.
-// Since multiple subsequences have the same shortest length, return the one that appears first, [0, 2].
+// Since multiple subsequences have the same shortest length, return [0, 2].
 
 import java.util.Arrays;
 
 public class Ex057_SequenceSum {
     public static void main(String[] args) {
+        // 첫 번째 테스트 케이스를 실행한다. # Run the first test case.
         System.out.println(Arrays.toString(solution(new int[] {1, 2, 3, 4, 5}, 7)));
+
+        // 두 번째 테스트 케이스를 실행한다. # Run the second test case.
         System.out.println(Arrays.toString(solution(new int[] {1, 1, 1, 2, 3, 4, 5}, 5)));
+
+        // 세 번째 테스트 케이스를 실행한다. # Run the third test case.
         System.out.println(Arrays.toString(solution(new int[] {2, 2, 2, 2, 2}, 6)));
     }
 
     public static int[] solution(int[] sequence, int k) {
-        // 부분 수열의 시작과 끝을 가리킬 두 개의 포인터를 선언한다.
-        // Declare two pointers to represent the start and end of the subsequence.
+        // 왼쪽 포인터를 0으로 초기화한다. # Initialize the left pointer to 0.
         int leftIndex = 0;
-        int rightIndex = 0;
 
-        // 현재 부분 수열의 합을 저장한다.
-        // Store the sum of the current subsequence.
+        // 현재 부분 수열의 합을 저장한다. # Store the current subsequence sum.
         long sum = 0;
 
-        // 조건을 만족하는 부분 수열의 시작과 끝 인덱스를 저장한다.
-        // Store the start and end indices of the valid subsequence.
+        // 결과 부분 수열의 시작 인덱스를 저장한다. # Store the start index of the result subsequence.
         int resultLeft = 0;
+
+        // 결과 부분 수열의 마지막 인덱스를 저장한다. # Store the end index of the result subsequence.
         int resultRight = 0;
 
-        // 가장 짧은 부분 수열의 길이를 저장한다.
-        // Store the length of the shortest subsequence.
-        int minLength = sequence.length;
+        // 최소 부분 수열 길이를 최대 가능한 값보다 크게 초기화한다. # Initialize the minimum subsequence length above the maximum possible length.
+        int minLength = sequence.length + 1;
 
-        // 오른쪽 포인터가 배열의 끝에 도달하지 않았거나 현재 합이 k 이상인 동안 탐색한다.
-        // Continue searching while the right pointer has not reached the end or the current sum is at least k.
-        while (rightIndex < sequence.length || sum >= k) {
+        // 오른쪽 포인터를 이동하며 부분 수열을 탐색한다. # Move the right pointer to search for subsequences.
+        for (int rightIndex = 0; rightIndex < sequence.length; rightIndex++) {
+            // 현재 원소를 부분 수열에 추가한다. # Add the current element to the subsequence.
+            sum += sequence[rightIndex];
 
-            // 현재 합이 k보다 작으면 오른쪽 포인터를 이동하여 원소를 추가한다.
-            // If the current sum is less than k, move the right pointer and add an element.
+            // 현재 합이 k보다 작으면 다음 원소를 추가한다. # Add the next element if the current sum is less than k.
             if (sum < k) {
-                sum += sequence[rightIndex];
-                rightIndex++;
+                continue;
+            }
 
-            // 현재 합이 k보다 크면 왼쪽 포인터를 이동하여 원소를 제거한다.
-            // If the current sum is greater than k, move the left pointer and remove an element.
-            } else if (sum > k) {
-                sum -= sequence[leftIndex];
-                leftIndex++;
+            // 현재 합이 k와 같으면 정답 후보를 확인한다. # Check the candidate when the current sum equals k.
+            if (sum == k) {
+                // 현재 부분 수열의 길이를 계산한다. # Calculate the current subsequence length.
+                int length = rightIndex - leftIndex + 1;
 
-            // 현재 합이 k와 같으면 조건을 만족하는 부분 수열을 확인한다.
-            // If the current sum equals k, check the valid subsequence.
-            } else {
-
-                // 현재 부분 수열의 길이를 계산한다.
-                // Calculate the length of the current subsequence.
-                int length = rightIndex - leftIndex;
-
-                // 현재 부분 수열이 기존 결과보다 짧은 경우 결과를 갱신한다.
-                // Update the result if the current subsequence is shorter than the previous result.
+                // 현재 부분 수열이 더 짧으면 결과를 갱신한다. # Update the result if the current subsequence is shorter.
                 if (length < minLength) {
                     resultLeft = leftIndex;
-                    resultRight = rightIndex - 1;
+                    resultRight = rightIndex;
                     minLength = length;
                 }
+            } else {
+                // 합이 k보다 크면 왼쪽 원소를 제거한다. # Remove elements from the left if the sum is greater than k.
+                while (sum > k) {
+                    sum -= sequence[leftIndex];
+                    leftIndex++;
+                }
 
-                // 다음 부분 수열을 탐색하기 위해 가장 왼쪽 원소를 제거한다.
-                // Remove the leftmost element to search for the next subsequence.
-                sum -= sequence[leftIndex];
-                leftIndex++;
+                // 왼쪽 원소를 제거한 후 합이 k인지 확인한다. # Check whether the sum equals k after removing elements.
+                if (sum == k) {
+                    // 현재 부분 수열의 길이를 계산한다. # Calculate the current subsequence length.
+                    int length = rightIndex - leftIndex + 1;
+
+                    // 현재 부분 수열이 더 짧으면 결과를 갱신한다. # Update the result if the current subsequence is shorter.
+                    if (length < minLength) {
+                        resultLeft = leftIndex;
+                        resultRight = rightIndex;
+                        minLength = length;
+                    }
+                }
             }
         }
 
-        // 가장 짧은 부분 수열의 시작과 끝 인덱스를 반환한다.
-        // Return the start and end indices of the shortest subsequence.
+        // 가장 짧은 부분 수열의 시작과 마지막 인덱스를 반환한다. # Return the start and end indices of the shortest subsequence.
         return new int[] {resultLeft, resultRight};
     }
 }
