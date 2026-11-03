@@ -84,6 +84,7 @@
 // are [1, 2, 3, 5].
 // Since there are 4 such villages, return 4.
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
@@ -92,67 +93,113 @@ public class Ex067_Delivery {
 
     public static void main(String[] args) {
         System.out.println(solution(5, new int[][]{{1, 2, 1}, {2, 3, 3}, {5, 2, 2},
-                                                        {1, 4, 2}, {5, 3, 1}, {5, 4, 2}}, 
+                                                        {1, 4, 2}, {5, 3, 1}, {5, 4, 2}},
                                     3));
 
         System.out.println(solution(6, new int[][]{{1, 2, 1}, {1, 3, 2}, {2, 3, 2},
                                                         {3, 4, 3}, {3, 5, 2}, {3, 5, 3},
-                                                        {5, 6, 1}}, 
+                                                        {5, 6, 1}},
                                     4));
     }
 
     // 배달 주문을 받을 수 있는 마을의 개수를 반환하는 메서드
     // Return the number of villages that can receive deliveries
     public static int solution(int N, int[][] road, int K) {
-        ArrayList<int[]>[] graph = new ArrayList[N+1];
+
+        // 각 마을에 연결된 마을과 도로 이동 시간을 저장하는 인접 리스트
+        // Create an adjacency list to store neighboring villages and road travel times
+        ArrayList<int[]>[] graph = new ArrayList[N + 1];
+
+        // 1번 마을에서 각 마을까지의 최단 이동 시간을 저장
+        // Store the shortest travel time from village 1 to each village
         int[] distance = new int[N + 1];
+
+        // 모든 마을의 거리를 무한대로 초기화
+        // Initialize all distances to infinity
         Arrays.fill(distance, Integer.MAX_VALUE);
+
+        // 출발 마을인 1번 마을까지의 거리는 0
+        // Set the distance to the starting village to 0
         distance[1] = 0;
 
-        PriorityQueue<int[]> pq = new PriorityQueue<>(
-            (a, b) -> Integer.compare(a[1], b[1])
-        );
-        pq.add(new int[]{1, 0});
-
+        // 각 마을의 인접 리스트 초기화
+        // Initialize an adjacency list for each village
         for (int i = 1; i <= N; i++) {
             graph[i] = new ArrayList<>();
         }
 
+        // 도로 정보를 인접 리스트에 양방향으로 저장
+        // Add each road to the adjacency list in both directions
         for (int[] road1 : road) {
             int startTown = road1[0];
             int endTown = road1[1];
-            int time = road1[2]; 
+            int time = road1[2];
 
             graph[startTown].add(new int[]{endTown, time});
             graph[endTown].add(new int[]{startTown, time});
         }
-        
+
+        // 이동 시간이 짧은 마을부터 탐색하기 위한 우선순위 큐
+        // Create a priority queue to process villages with shorter travel times first
+        PriorityQueue<int[]> pq = new PriorityQueue<>(
+            (a, b) -> Integer.compare(a[1], b[1])
+        );
+
+        // 출발 마을과 이동 시간 0을 큐에 추가
+        // Add the starting village and its travel time of 0 to the queue
+        pq.add(new int[]{1, 0});
+
+        // 우선순위 큐가 빌 때까지 최단 거리 탐색
+        // Find shortest distances until the priority queue is empty
         while (!pq.isEmpty()) {
+
+            // 현재 이동 시간이 가장 짧은 마을을 꺼냄
+            // Retrieve the village with the shortest travel time
             int[] current = pq.poll();
             int currentTown = current[0];
-            int time = current[1]; 
+            int time = current[1];
+
+            // 이미 더 짧은 거리가 확인된 경우 현재 탐색을 건너뜀
+            // Skip this entry if a shorter distance has already been found
             if (time > distance[currentTown]) {
                 continue;
             }
 
-            for (int[] next: graph[currentTown]) {
+            // 현재 마을과 연결된 다음 마을들을 확인
+            // Check all neighboring villages connected to the current village
+            for (int[] next : graph[currentTown]) {
                 int nextTown = next[0];
                 int roadTime = next[1];
 
+                // 다음 마을까지 이동하는 새로운 총 소요 시간 계산
+                // Calculate the new total travel time to the next village
                 int newTime = time + roadTime;
+
+                // 기존 최단 거리보다 짧은 경로를 발견한 경우
+                // Update the distance if a shorter route is found
                 if (newTime < distance[nextTown]) {
                     distance[nextTown] = newTime;
+
+                    // 갱신된 마을과 이동 시간을 우선순위 큐에 추가
+                    // Add the updated village and travel time to the priority queue
                     pq.add(new int[]{nextTown, newTime});
                 }
             }
         }
 
+        // 배달 가능한 마을의 개수
+        // Count the villages that can receive deliveries
         int result = 0;
-        
+
+        // 1번 마을부터 N번 마을까지 확인
+        // Check all villages from 1 to N
         for (int i = 1; i <= N; i++) {
+
+            // 최단 이동 시간이 K 이하인 마을의 개수를 증가
+            // Count villages whose shortest travel time is within K
             if (distance[i] <= K) {
                 result += 1;
-            } 
+            }
         }
 
         return result;
