@@ -131,10 +131,10 @@ public class Ex069_RicochetRobot {
         // Queue가 빌 때까지 BFS 탐색 # Perform BFS until the queue becomes empty
         while (!queue.isEmpty()) {
             // 현재 이동 횟수에서 탐색할 위치의 개수 # Number of positions to explore at the current move count
-            int size = queue.size();
+            int levelSize = queue.size();
 
             // 현재 단계에 해당하는 모든 위치 탐색 # Explore all positions at the current level
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < levelSize; i++) {
                 // Queue에서 현재 위치를 꺼내기 # Retrieve the current position from the queue
                 int[] current = queue.poll();
 
