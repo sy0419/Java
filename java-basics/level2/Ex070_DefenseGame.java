@@ -117,7 +117,8 @@ public class Ex070_DefenseGame {
                 // # Remove the round with the fewest enemies from the invincibility candidates and consume soldiers
                 n -= pq.poll();
 
-                // 병사가 음수가 되면 현재 라운드를 막을 수 없으므로 이전까지의 라운드 수 반환 # If the number of soldiers becomes negative, return the number of rounds defended before the current round
+                // 병사가 음수가 되면 현재 라운드를 막을 수 없으므로 이전까지의 라운드 수 반환 
+                // # If the number of soldiers becomes negative, return the number of rounds defended before the current round
                 if (n < 0) {
                     return i;
                 }
